@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { randomBytes } = require('crypto')
+const { randomBytes } = require('crypto');
 
 class UsersRepository {
   constructor(filename) {
@@ -28,26 +28,33 @@ class UsersRepository {
   async create(userAttrs) {
     const usersArr = await this.getAll();
 
-    const id = randomBytes(6).toString('hex')
-    usersArr.push({...userAttrs, id});
-    await this.writeAll(usersArr)
+    const id = randomBytes(6).toString('hex');
+    usersArr.push({ ...userAttrs, id });
+    await this.writeAll(usersArr);
   }
 
   async writeAll(usersArr) {
     try {
-      await fs.promises.writeFile(this.filename, JSON.stringify(usersArr, null, 2));
+      await fs.promises.writeFile(
+        this.filename,
+        JSON.stringify(usersArr, null, 2)
+      );
     } catch (error) {
       console.log('Error creating new user record');
     }
+  }
+
+  async getOneById(id) {
+    const usersArr = await this.getAll();
+    return usersArr.find((user) => user.id === id);
   }
 }
 
 const test = async () => {
   const repo = new UsersRepository('users.json');
 
-  await repo.create({email: 'test@gmail.com', password: '123456'});
-  const users = await repo.getAll();
-  console.log(users);
+  const user = await repo.getOneById('a2c870158395')
+  console.log(user)
 };
 
 test();
