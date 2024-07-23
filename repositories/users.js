@@ -28,10 +28,14 @@ class UsersRepository {
     const usersArr = await this.getAll();
     usersArr.push(userAttrs);
 
+    await this.writeAll(usersArr)
+  }
+
+  async writeAll(usersArr) {
     try {
-      await fs.promises.writeFile(this.filename, JSON.stringify(usersArr));
+      await fs.promises.writeFile(this.filename, JSON.stringify(usersArr, null, 2));
     } catch (error) {
-      console.log('error');
+      console.log('Error creating new user record');
     }
   }
 }
