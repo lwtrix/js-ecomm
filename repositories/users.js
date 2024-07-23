@@ -54,12 +54,25 @@ class UsersRepository {
     const updatedUsersArr = usersArr.filter(user => user.id !== id)
     await this.writeAll(updatedUsersArr)
   }
+
+  async update(id, updatedAttrs) {
+    const usersArr = await this.getAll()
+    const foundUser = usersArr.find((user) => user.id === id);
+    
+    if(!foundUser) {
+      throw new Error(`User with id: ${id} was not found`)
+    }
+
+    Object.assign(foundUser, updatedAttrs)
+    await this.writeAll(usersArr);
+  }
 }
 
 const test = async () => {
   const repo = new UsersRepository('users.json');
 
-  const users = await repo.delete('a2c870sdsa158395')
+  await repo.update('bf175471e93d', { email: 'david01@gmail.com', password: 'mypass'})
+  const users = await repo.getAll()
   console.log(users)
 };
 
