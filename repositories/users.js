@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { randomBytes } = require('crypto')
 
 class UsersRepository {
   constructor(filename) {
@@ -26,8 +27,9 @@ class UsersRepository {
 
   async create(userAttrs) {
     const usersArr = await this.getAll();
-    usersArr.push(userAttrs);
 
+    const id = randomBytes(6).toString('hex')
+    usersArr.push({...userAttrs, id});
     await this.writeAll(usersArr)
   }
 
