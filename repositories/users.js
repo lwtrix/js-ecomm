@@ -16,8 +16,8 @@ class UsersRepository {
     }
   }
 
+  // retrieve all user records
   async getAll() {
-    // open file, parse and read contents
     return JSON.parse(
       await fs.promises.readFile(this.filename, {
         encoding: 'utf8',
@@ -25,14 +25,15 @@ class UsersRepository {
     );
   }
 
+  // create a user record
   async create(userAttrs) {
     const usersArr = await this.getAll();
-
     const id = randomBytes(6).toString('hex');
     usersArr.push({ ...userAttrs, id });
     await this.writeAll(usersArr);
   }
 
+  // write to users records
   async writeAll(usersArr) {
     try {
       await fs.promises.writeFile(
@@ -40,21 +41,43 @@ class UsersRepository {
         JSON.stringify(usersArr, null, 2)
       );
     } catch (error) {
-      console.log('Error creating new user record');
+      console.log('Error writing to users records');
     }
   }
 
+  // retrieve one user record by id
   async getOneById(id) {
     const usersArr = await this.getAll();
     return usersArr.find((user) => user.id === id);
   }
 
+  // retrieve on user record based on multiple attributes
+  async getOneBy(filters) {
+    const usersArr = await this.getAll();
+
+    for(let user of usersArr) {
+      let found = true;
+
+      for(let key in filters) {
+        if(filters[key] !== user[key]) {
+          found = false
+        } 
+      }
+
+      if(found) {
+        return user
+      }
+    }
+  }
+
+  // delete a single user record
   async delete(id) {
     const usersArr = await this.getAll()
     const updatedUsersArr = usersArr.filter(user => user.id !== id)
     await this.writeAll(updatedUsersArr)
   }
 
+  // update a single user record
   async update(id, updatedAttrs) {
     const usersArr = await this.getAll()
     const foundUser = usersArr.find((user) => user.id === id);
@@ -68,12 +91,4 @@ class UsersRepository {
   }
 }
 
-const test = async () => {
-  const repo = new UsersRepository('users.json');
-
-  await repo.update('bf175471e93d', { email: 'david01@gmail.com', password: 'mypass'})
-  const users = await repo.getAll()
-  console.log(users)
-};
-
-test();
+module.exports = new UsersRepository('users.json')
