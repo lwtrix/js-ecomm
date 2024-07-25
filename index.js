@@ -12,6 +12,15 @@ server.use(
   })
 );
 
+server.get('/home', (req, res) => {
+  res.send(`
+    <h1>Welcome, your user id is: ${req.session.user}</h1>
+    <form action="/signout">
+      <button>Signout</button>  
+    </form>
+  `)
+})
+
 server.get('/signup', (req, res) => {
   res.send(`
     <div>
@@ -46,7 +55,7 @@ server.post('/signup', async (req, res) => {
   res.send('authenticated');
 });
 
-server.get('signin', (req, res) => {
+server.get('/signin', (req, res) => {
   res.send(`
     <div>
     <h1>Sign in</h1>
@@ -58,6 +67,23 @@ server.get('signin', (req, res) => {
     </div>
   `);
 });
+
+server.post('/signin', async (req, res) => {
+  const { email, password } = req.body
+
+  const foundUser = await Users.getOneBy({ email });
+
+  if(!foundUser) {
+    return res.send('Email and password do not match')
+  }
+
+  if(foundUser.password !== password) {
+    return res.send('Email and password do not match')
+  }
+
+  req.session.user = foundUser.id
+  res.redirect('/home')
+})
 
 server.get('/signout', (req, res) => {
   req.session = null;
