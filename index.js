@@ -10,9 +10,10 @@ server.use(cookieSession({
   keys: ['adwfrwfdawd21d2']
 }))
 
-server.get('/', (req, res) => {
+server.get('/signup', (req, res) => {
   res.send(`
     <div>
+    You're signed in as: ${req.session.user}
       <form method="POST">
         <input name="email" placeholder="E-mail"/>
         <input type="password"  name="password" placeholder="Password"/>
@@ -23,7 +24,7 @@ server.get('/', (req, res) => {
   `);
 });
 
-server.post('/', async (req, res) => {
+server.post('/signup', async (req, res) => {
   const { email, password, passwordConfirmation} = req.body
 
   const userExists = await Users.getOneBy({ email })
@@ -41,6 +42,12 @@ server.post('/', async (req, res) => {
 
   res.send('authenticated');
 });
+
+server.get('/signout', (req, res) => {
+  req.session = null
+
+  res.redirect('/signup')
+})
 
 server.listen(3001, () => {
   console.log('ECOMM Server Status: Live (PORT: 3001)');

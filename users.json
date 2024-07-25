@@ -13,5 +13,15 @@
     "email": "test@dada.com",
     "password": "dada",
     "id": "59e85f2ca8c9"
+  },
+  {
+    "email": "dada@dada.com",
+    "password": "dada",
+    "id": "67920a7c9cea"
+  },
+  {
+    "email": "gaga@gaga.com",
+    "password": "gaga",
+    "id": "cb4078c0f36a"
   }
 ]
