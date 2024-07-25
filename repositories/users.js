@@ -28,9 +28,12 @@ class UsersRepository {
   // create a user record
   async create(userAttrs) {
     const usersArr = await this.getAll();
+
     const id = randomBytes(6).toString('hex');
     usersArr.push({ ...userAttrs, id });
+
     await this.writeAll(usersArr);
+    return id;
   }
 
   // write to users records
@@ -55,40 +58,40 @@ class UsersRepository {
   async getOneBy(filters) {
     const usersArr = await this.getAll();
 
-    for(let user of usersArr) {
+    for (let user of usersArr) {
       let found = true;
 
-      for(let key in filters) {
-        if(filters[key] !== user[key]) {
-          found = false
-        } 
+      for (let key in filters) {
+        if (filters[key] !== user[key]) {
+          found = false;
+        }
       }
 
-      if(found) {
-        return user
+      if (found) {
+        return user;
       }
     }
   }
 
   // delete a single user record
   async delete(id) {
-    const usersArr = await this.getAll()
-    const updatedUsersArr = usersArr.filter(user => user.id !== id)
-    await this.writeAll(updatedUsersArr)
+    const usersArr = await this.getAll();
+    const updatedUsersArr = usersArr.filter((user) => user.id !== id);
+    await this.writeAll(updatedUsersArr);
   }
 
   // update a single user record
   async update(id, updatedAttrs) {
-    const usersArr = await this.getAll()
+    const usersArr = await this.getAll();
     const foundUser = usersArr.find((user) => user.id === id);
-    
-    if(!foundUser) {
-      throw new Error(`User with id: ${id} was not found`)
+
+    if (!foundUser) {
+      throw new Error(`User with id: ${id} was not found`);
     }
 
-    Object.assign(foundUser, updatedAttrs)
+    Object.assign(foundUser, updatedAttrs);
     await this.writeAll(usersArr);
   }
 }
 
-module.exports = new UsersRepository('users.json')
+module.exports = new UsersRepository('users.json');
