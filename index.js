@@ -13,7 +13,11 @@ server.use(
 );
 
 server.get('/home', (req, res) => {
-  res.send(`
+  if(!req.session?.user) {
+    return res.redirect('/signin')
+  }
+
+  return res.send(`
     <h1>Welcome, your user id is: ${req.session.user}</h1>
     <form action="/signout">
       <button>Signout</button>  
