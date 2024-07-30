@@ -47,6 +47,14 @@ class UsersRepository {
     await this.writeAll(usersArr);
     return newUser;
   }
+  
+  // comparing passwords for auth
+  async passwordAuth(targetPw, sourcePw) {
+    const [hashedPw, salt] = targetPw.split('.');
+    const sourcePwBuff = await Scrypt(sourcePw, salt, 64);
+
+    return hashedPw === sourcePwBuff.toString('hex');
+  }
 
   // write to users records
   async writeAll(usersArr) {

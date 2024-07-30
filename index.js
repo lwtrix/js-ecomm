@@ -13,8 +13,8 @@ server.use(
 );
 
 server.get('/home', (req, res) => {
-  if(!req.session?.user) {
-    return res.redirect('/signin')
+  if (!req.session?.user) {
+    return res.redirect('/signin');
   }
 
   return res.send(`
@@ -22,8 +22,8 @@ server.get('/home', (req, res) => {
     <form action="/signout">
       <button>Signout</button>  
     </form>
-  `)
-})
+  `);
+});
 
 server.get('/signup', (req, res) => {
   res.send(`
@@ -72,21 +72,22 @@ server.get('/signin', (req, res) => {
 });
 
 server.post('/signin', async (req, res) => {
-  const { email, password } = req.body
+  const { email, password } = req.body;
 
   const foundUser = await Users.getOneBy({ email });
 
-  if(!foundUser) {
-    return res.send('Email and password do not match')
+  if (!foundUser) {
+    return res.send('Email and password do not match');
   }
 
-  if(foundUser.password !== password) {
-    return res.send('Email and password do not match')
+  const pwMatch = await Users.passwordAuth(foundUser.password, password);
+  if (!pwMatch) {
+    return res.send('Email and password do not match');
   }
 
-  req.session.user = foundUser.id
-  res.redirect('/home')
-})
+  req.session.user = foundUser.id;
+  res.redirect('/home');
+});
 
 server.get('/signout', (req, res) => {
   req.session = null;
