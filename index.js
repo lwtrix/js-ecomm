@@ -29,7 +29,6 @@ server.get('/signup', (req, res) => {
   res.send(`
     <div>
     <h1>Create an account</h1>
-    You're signed in as: ${req.session.user}
       <form method="POST">
         <input name="email" placeholder="E-mail"/>
         <input type="password"  name="password" placeholder="Password"/>
@@ -54,7 +53,7 @@ server.post('/signup', async (req, res) => {
   }
 
   const user = await Users.create({ email, password });
-  req.session.user = user;
+  req.session.user = user.id;
 
   res.send('authenticated');
 });
