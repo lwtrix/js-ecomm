@@ -1,20 +1,13 @@
 const express = require('express')
 const Admins = require('../../repositories/admins.js')
 
+const signInView = require('../../views/admin/auth/signin.js')
+const signUpView = require('../../views/admin/auth/signup.js')
+
 const router = express.Router()
 
 router.get('/signup', (req, res) => {
-  res.send(`
-    <div>
-    <h1>Create an account</h1>
-      <form method="POST">
-        <input name="email" placeholder="E-mail"/>
-        <input type="password"  name="password" placeholder="Password"/>
-        <input type="password" name="passwordConfirmation"  placeholder="Confirm Password"/>
-        <button>Sign Up</button>
-      </form>
-    </div>
-  `);
+  res.send(signUpView({ req }));
 });
 
 router.post('/signup', async (req, res) => {
@@ -37,16 +30,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.get('/signin', (req, res) => {
-  res.send(`
-    <div>
-    <h1>Sign in</h1>
-      <form method="POST">
-        <input name="email" placeholder="E-mail"/>
-        <input type="password"  name="password" placeholder="Password"/>
-        <button>Sign In</button>
-      </form>
-    </div>
-  `);
+  res.send(signInView());
 });
 
 router.post('/signin', async (req, res) => {

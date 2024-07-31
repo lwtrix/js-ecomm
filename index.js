@@ -1,7 +1,6 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
 
-const Admins = require('./repositories/admins.js');
 const adminAuthRouter = require('./routes/admin/auth.js')
 
 const server = express();
