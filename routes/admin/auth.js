@@ -3,6 +3,12 @@ const { check, validationResult } = require('express-validator');
 
 const Admins = require('../../repositories/admins.js');
 
+const {
+  requireEmail,
+  requirePassword,
+  requirePasswordConfirm,
+} = require('./validators.js');
+
 const signInView = require('../../views/admin/auth/signin.js');
 const signUpView = require('../../views/admin/auth/signup.js');
 
@@ -14,40 +20,15 @@ router.get('/signup', (req, res) => {
 
 router.post(
   '/signup',
-  [
-    check('email')
-      .trim()
-      .normalizeEmail()
-      .isEmail()
-      .withMessage('Please enter a valid email')
-      .custom(async (email) => {
-        const userExists = await Admins.getOneBy({ email });
-        if (userExists) {
-          throw new Error('Email is already in use');
-        }
-      }),
-    check('password')
-      .trim()
-      .isLength({ min: 6, max: 18 })
-      .withMessage('Password must be between 6 and 18 characters'),
-    check('passwordConfirmation')
-      .trim()
-      .isLength({ min: 6, max: 18 })
-      .withMessage('Password must be between 6 and 18 characters')
-      .custom((passwordConfirmation, { req }) => {
-        if (req.body.password !== passwordConfirmation) {
-          throw new Error('Passwords do not match')
-        }
-      }),
-  ],
+  [requireEmail, requirePassword, requirePasswordConfirm],
   async (req, res) => {
     const valErrors = validationResult(req);
-    
-    if(!valErrors.isEmpty()) {
-      return res.send('Validation errors')
+
+    if (!valErrors.isEmpty()) {
+      return res.send('Validation errors');
     }
 
-    const { email, password, passwordConfirmation } = req.body;
+    const { email, password } = req.body;
 
     const user = await Admins.create({ email, password });
     req.session.user = user.id;
