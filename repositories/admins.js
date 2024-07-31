@@ -4,7 +4,7 @@ const util = require('util');
 
 const Scrypt = util.promisify(scrypt);
 
-class UsersRepository {
+class AdminsRepository {
   constructor(filename) {
     if (!filename) {
       throw new Error('Creating a repository requires a file name');
@@ -19,7 +19,7 @@ class UsersRepository {
     }
   }
 
-  // retrieve all user records
+  // retrieve all admin records
   async getAll() {
     return JSON.parse(
       await fs.promises.readFile(this.filename, {
@@ -28,24 +28,24 @@ class UsersRepository {
     );
   }
 
-  // create new user record
-  async create(userAttrs) {
-    const usersArr = await this.getAll();
+  // create new admin record
+  async create(adminAttrs) {
+    const adminsArr = await this.getAll();
     const id = randomBytes(6).toString('hex');
 
     const salt = randomBytes(8).toString('hex');
-    const pwBuff = await Scrypt(userAttrs.password, salt, 64);
+    const pwBuff = await Scrypt(adminAttrs.password, salt, 64);
 
-    const newUser = {
+    const newAdmin = {
       id,
-      ...userAttrs,
+      ...adminAttrs,
       password: `${pwBuff.toString('hex')}.${salt}`,
     };
 
-    usersArr.push(newUser);
+    adminsArr.push(newAdmin);
 
-    await this.writeAll(usersArr);
-    return newUser;
+    await this.writeAll(adminsArr);
+    return newAdmin;
   }
   
   // comparing passwords for auth
@@ -56,62 +56,62 @@ class UsersRepository {
     return hashedPw === sourcePwBuff.toString('hex');
   }
 
-  // write to users records
-  async writeAll(usersArr) {
+  // write to admins records
+  async writeAll(adminsArr) {
     try {
       await fs.promises.writeFile(
         this.filename,
-        JSON.stringify(usersArr, null, 2)
+        JSON.stringify(adminsArr, null, 2)
       );
     } catch (error) {
-      console.log('Error writing to users records');
+      console.log('Error writing to admin records');
     }
   }
 
-  // retrieve one user record by id
+  // retrieve one admin record by id
   async getOneById(id) {
-    const usersArr = await this.getAll();
-    return usersArr.find((user) => user.id === id);
+    const adminsArr = await this.getAll();
+    return adminsArr.find((admin) => admin.id === id);
   }
 
-  // retrieve on user record based on multiple attributes
+  // retrieve an admin record based on multiple attributes
   async getOneBy(filters) {
-    const usersArr = await this.getAll();
+    const adminsArr = await this.getAll();
 
-    for (let user of usersArr) {
+    for (let admin of adminsArr) {
       let found = true;
 
       for (let key in filters) {
-        if (filters[key] !== user[key]) {
+        if (filters[key] !== admin[key]) {
           found = false;
         }
       }
 
       if (found) {
-        return user;
+        return admin;
       }
     }
   }
 
-  // delete a single user record
+  // delete a single admin record
   async delete(id) {
-    const usersArr = await this.getAll();
-    const updatedUsersArr = usersArr.filter((user) => user.id !== id);
-    await this.writeAll(updatedUsersArr);
+    const adminsArr = await this.getAll();
+    const updatedadminsArr = adminsArr.filter((user) => user.id !== id);
+    await this.writeAll(updatedadminsArr);
   }
 
-  // update a single user record
+  // update a single admin record
   async update(id, updatedAttrs) {
-    const usersArr = await this.getAll();
-    const foundUser = usersArr.find((user) => user.id === id);
+    const adminsArr = await this.getAll();
+    const foundAdmin = adminsArr.find((admin) => admin.id === id);
 
-    if (!foundUser) {
-      throw new Error(`User with id: ${id} was not found`);
+    if (!foundAdmin) {
+      throw new Error(`Admin with id: ${id} was not found`);
     }
 
-    Object.assign(foundUser, updatedAttrs);
-    await this.writeAll(usersArr);
+    Object.assign(foundAdmin, updatedAttrs);
+    await this.writeAll(adminsArr);
   }
 }
 
-module.exports = new UsersRepository('users.json');
+module.exports = new AdminsRepository('admins.json');

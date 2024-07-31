@@ -1,6 +1,6 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
-const Users = require('./repositories/users.js');
+const Admins = require('./repositories/admins.js');
 
 const server = express();
 
@@ -42,7 +42,7 @@ server.get('/signup', (req, res) => {
 server.post('/signup', async (req, res) => {
   const { email, password, passwordConfirmation } = req.body;
 
-  const userExists = await Users.getOneBy({ email });
+  const userExists = await Admins.getOneBy({ email });
 
   if (userExists) {
     return res.send('Email is in use');
@@ -52,7 +52,7 @@ server.post('/signup', async (req, res) => {
     return res.send('Password and password confirmation must match');
   }
 
-  const user = await Users.create({ email, password });
+  const user = await Admins.create({ email, password });
   req.session.user = user.id;
 
   res.send('authenticated');
@@ -74,13 +74,14 @@ server.get('/signin', (req, res) => {
 server.post('/signin', async (req, res) => {
   const { email, password } = req.body;
 
-  const foundUser = await Users.getOneBy({ email });
+  const foundUser = await Admins.getOneBy({ email });
 
   if (!foundUser) {
     return res.send('Email and password do not match');
   }
 
-  const pwMatch = await Users.passwordAuth(foundUser.password, password);
+  const pwMatch = await Admins.passwordAuth(foundUser.password, password);
+  
   if (!pwMatch) {
     return res.send('Email and password do not match');
   }
