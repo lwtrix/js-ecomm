@@ -29,4 +29,27 @@ module.exports = {
       }
       return true;
     }),
+  checkEmailExists: check('email')
+    .trim()
+    .isEmail()
+    .withMessage('Please enter a valid email')
+    .custom(async (email) => {
+      const foundUser = await Admins.getOneBy({ email });
+      if (!foundUser) {
+        throw new Error('Email and password do not match');
+      }
+    }),
+  checkPassword: check('password')
+    .trim()
+    .custom(async (password, { req }) => {
+      const foundUser = await Admins.getOneBy({ email: req.body.email });
+      if (!foundUser) {
+        throw new Error('Email and password do not match');
+      }
+
+      const pwMatch = await Admins.passwordAuth(foundUser.password, password);
+      if (!pwMatch) {
+        throw new Error('Email and password do not match');
+      }
+    }),
 };

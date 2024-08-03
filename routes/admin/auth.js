@@ -7,6 +7,8 @@ const {
   requireEmail,
   requirePassword,
   requirePasswordConfirm,
+  checkEmailExists,
+  checkPassword,
 } = require('./validators.js');
 
 const signInView = require('../../views/admin/auth/signin.js');
@@ -23,7 +25,6 @@ router.post(
   [requireEmail, requirePassword, requirePasswordConfirm],
   async (req, res) => {
     const valErrors = validationResult(req);
-
     if (!valErrors.isEmpty()) {
       return res.send(signUpView({ req, errors: valErrors }));
     }
@@ -41,22 +42,12 @@ router.get('/signin', (req, res) => {
   res.send(signInView());
 });
 
-router.post('/signin', async (req, res) => {
-  const { email, password } = req.body;
-
-  const foundUser = await Admins.getOneBy({ email });
-
-  if (!foundUser) {
-    return res.send('Email and password do not match');
+router.post('/signin', [checkEmailExists, checkPassword], async (req, res) => {
+  const valErrors = validationResult(req);
+  if (!valErrors.isEmpty()) {
+    return res.send('failed');
   }
-
-  const pwMatch = await Admins.passwordAuth(foundUser.password, password);
-
-  if (!pwMatch) {
-    return res.send('Email and password do not match');
-  }
-
-  req.session.user = foundUser.id;
+  
   res.send('authenticated');
 });
 
