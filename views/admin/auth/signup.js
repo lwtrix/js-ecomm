@@ -1,18 +1,8 @@
 const layout = require('../layout.js');
+const getError = require('../../utils.js')
 
-const getError = (errors, field) => {
-  if (errors) {
-    if (!errors.mapped()[field]) {
-      return '';
-    }
-    const errMsg = errors.mapped()[field].msg;
-    return errMsg;
-  }
 
-  return '';
-};
-
-module.exports = ({ req, errors }) => {
+module.exports = ({ errors }) => {
   return layout({
     content: `
     <div>

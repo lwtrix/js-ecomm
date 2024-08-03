@@ -34,20 +34,20 @@ router.post(
     const user = await Admins.create({ email, password });
     req.session.user = user.id;
 
-    res.send('authenticated');
+    res.send('account created');
   }
 );
 
 router.get('/signin', (req, res) => {
-  res.send(signInView());
+  res.send(signInView({}));
 });
 
 router.post('/signin', [checkEmailExists, checkPassword], async (req, res) => {
   const valErrors = validationResult(req);
   if (!valErrors.isEmpty()) {
-    return res.send('failed');
+    return res.send(signInView({ req, errors: valErrors }));
   }
-  
+
   res.send('authenticated');
 });
 
