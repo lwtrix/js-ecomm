@@ -22,8 +22,11 @@ module.exports = {
     .isLength({ min: 6, max: 18 })
     .withMessage('Password must be between 6 and 18 characters')
     .custom((passwordConfirmation, { req }) => {
+      console.log('checking password confirm');
       if (req.body.password !== passwordConfirmation) {
+        console.log('in here');
         throw new Error('Passwords do not match');
       }
+      return true;
     }),
 };
