@@ -25,7 +25,7 @@ router.post(
     const valErrors = validationResult(req);
 
     if (!valErrors.isEmpty()) {
-      return res.send('Validation errors');
+      return res.send(signUpView({ req, errors: valErrors }));
     }
 
     const { email, password } = req.body;
