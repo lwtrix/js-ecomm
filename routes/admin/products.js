@@ -23,7 +23,7 @@ router.get('/edit/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  // edit a proeuct
+  // edit a product
 });
 
 router.delete('/:id', (req, res) => {
