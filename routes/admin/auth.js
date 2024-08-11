@@ -1,5 +1,5 @@
 const express = require('express');
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 const Admins = require('../../repositories/admins.js');
 

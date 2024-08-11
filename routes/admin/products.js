@@ -1,8 +1,11 @@
 const express = require('express');
-const Products = require('../../repositories/products');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+
+const Products = require('../../repositories/products');
 
 const addProductView = require('../../views/admin/products/add');
+const { requireProductName, requireProductPrice } = require('./validators');
 
 router.get('/', (req, res) => {
   // get all products
@@ -10,12 +13,19 @@ router.get('/', (req, res) => {
 
 router.get('/add', (req, res) => {
   // render form to add a product
-
   res.send(addProductView({}));
 });
 
-router.post('/add', (req, res) => {
+router.post('/add', [requireProductName, requireProductPrice], (req, res) => {
   // add a product
+
+  const valErrors = validationResult(req);
+  if (!valErrors.isEmpty()) {
+    console.log(valErrors);
+    return res.send('errors');
+  }
+
+  res.send('success')
 });
 
 router.get('/:id', (req, res) => {

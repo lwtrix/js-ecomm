@@ -50,4 +50,13 @@ module.exports = {
         throw new Error('Email and password do not match');
       }
     }),
+  requireProductName: check('productName')
+    .trim()
+    .isLength({ min: 3, max: 36 })
+    .withMessage('Please enter a name between 3 and 36 characters'),
+  requireProductPrice: check('productPrice')
+    .trim()
+    .toFloat()
+    .isFloat({ min: 1 })
+    .withMessage('Products must have a minimum price of £1'),
 };
