@@ -1,6 +1,8 @@
 const express = require('express');
-
+const Products = require('../../repositories/products');
 const router = express.Router();
+
+const addProductView = require('../../views/admin/products/add');
 
 router.get('/', (req, res) => {
   // get all products
@@ -8,6 +10,8 @@ router.get('/', (req, res) => {
 
 router.get('/add', (req, res) => {
   // render form to add a product
+
+  res.send(addProductView({}));
 });
 
 router.post('/add', (req, res) => {
