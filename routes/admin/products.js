@@ -1,5 +1,5 @@
 const express = require('express');
-const { validationResult } = require('express-validator');
+const { handleValErrors } = require('../../middleware/admin/index');
 const multer = require('multer');
 
 const Products = require('../../repositories/products');
@@ -10,26 +10,21 @@ const addProductView = require('../../views/admin/products/add');
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.get('/', (req, res) => {
-  // get all products
-});
+// get all products
+router.get('/', (req, res) => {});
 
+// render form to add a product
 router.get('/add', (req, res) => {
-  // render form to add a product
   res.send(addProductView({}));
 });
 
+// add a product
 router.post(
   '/add',
   upload.single('productImage'),
   [requireProductName, requireProductPrice],
+  handleValErrors(addProductView),
   async (req, res) => {
-    // add a product
-    const valErrors = validationResult(req);
-    if (!valErrors.isEmpty()) {
-      return res.send(addProductView({ errors: valErrors }));
-    }
-
     const image = req.file.buffer.toString('base64');
     const { productName, productPrice } = req.body;
 
@@ -39,20 +34,16 @@ router.post(
   }
 );
 
-router.get('/:id', (req, res) => {
-  // get a single product
-});
+// get a single product
+router.get('/:id', (req, res) => {});
 
-router.get('/edit/:id', (req, res) => {
-  // render form to edit a product
-});
+// render form to edit a product
+router.get('/edit/:id', (req, res) => {});
 
-router.put('/:id', (req, res) => {
-  // edit a product
-});
+// edit a product
+router.put('/:id', (req, res) => {});
 
-router.delete('/:id', (req, res) => {
-  // remove a product
-});
+// remove a product
+router.delete('/:id', (req, res) => {});
 
 module.exports = router;

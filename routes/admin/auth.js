@@ -1,5 +1,5 @@
 const express = require('express');
-const { validationResult } = require('express-validator');
+const { handleValErrors } = require('../../middleware/admin/index');
 
 const Admins = require('../../repositories/admins.js');
 
@@ -23,12 +23,8 @@ router.get('/signup', (req, res) => {
 router.post(
   '/signup',
   [requireEmail, requirePassword, requirePasswordConfirm],
+  handleValErrors(signUpView),
   async (req, res) => {
-    const valErrors = validationResult(req);
-    if (!valErrors.isEmpty()) {
-      return res.send(signUpView({ req, errors: valErrors }));
-    }
-
     const { email, password } = req.body;
 
     const user = await Admins.create({ email, password });
@@ -42,14 +38,14 @@ router.get('/signin', (req, res) => {
   res.send(signInView({}));
 });
 
-router.post('/signin', [checkEmailExists, checkPassword], async (req, res) => {
-  const valErrors = validationResult(req);
-  if (!valErrors.isEmpty()) {
-    return res.send(signInView({ req, errors: valErrors }));
+router.post(
+  '/signin',
+  [checkEmailExists, checkPassword],
+  handleValErrors(signInView),
+  async (req, res) => {
+    res.send('authenticated');
   }
-
-  res.send('authenticated');
-});
+);
 
 router.get('/signout', (req, res) => {
   req.session = null;
