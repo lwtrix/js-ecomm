@@ -1,11 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
+const multer = require('multer');
 
 const Products = require('../../repositories/products');
+const { requireProductName, requireProductPrice } = require('./validators');
 
 const addProductView = require('../../views/admin/products/add');
-const { requireProductName, requireProductPrice } = require('./validators');
+
+const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/', (req, res) => {
   // get all products
@@ -16,17 +19,25 @@ router.get('/add', (req, res) => {
   res.send(addProductView({}));
 });
 
-router.post('/add', [requireProductName, requireProductPrice], (req, res) => {
-  // add a product
+router.post(
+  '/add',
+  upload.single('productImage'),
+  [requireProductName, requireProductPrice],
+  async (req, res) => {
+    // add a product
+    const valErrors = validationResult(req);
+    if (!valErrors.isEmpty()) {
+      return res.send(addProductView({ errors: valErrors }));
+    }
 
-  const valErrors = validationResult(req);
-  if (!valErrors.isEmpty()) {
-    console.log(valErrors);
-    return res.send('errors');
+    const image = req.file.buffer.toString('base64');
+    const { productName, productPrice } = req.body;
+
+    await Products.create({ productName, productPrice, image });
+
+    res.send('success');
   }
-
-  res.send('success')
-});
+);
 
 router.get('/:id', (req, res) => {
   // get a single product
