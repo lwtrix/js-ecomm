@@ -34,7 +34,7 @@ module.exports = {
     .custom(async (email) => {
       const foundUser = await Admins.getOneBy({ email });
       if (!foundUser) {
-        throw new Error('Email and password do not match');
+        throw new Error('An account with that email does not exist');
       }
     }),
   checkPassword: check('password')
@@ -47,7 +47,7 @@ module.exports = {
 
       const pwMatch = await Admins.passwordAuth(foundUser.password, password);
       if (!pwMatch) {
-        throw new Error('Email and password do not match');
+        throw new Error('Wrong password entered');
       }
     }),
   requireProductName: check('productName')
