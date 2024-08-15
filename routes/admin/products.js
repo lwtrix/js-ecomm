@@ -6,12 +6,17 @@ const Products = require('../../repositories/products');
 const { requireProductName, requireProductPrice } = require('./validators');
 
 const addProductView = require('../../views/admin/products/add');
+const productsIndexView = require('../../views/admin/products/index');
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // get all products
-router.get('/', (req, res) => {});
+router.get('/', async (req, res) => {
+  const products = await Products.getAll();
+
+  res.send(productsIndexView({ products }))
+});
 
 // render form to add a product
 router.get('/add', (req, res) => {
