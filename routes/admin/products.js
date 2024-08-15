@@ -19,7 +19,7 @@ router.get('/admin/products', isAuthenticated, async (req, res) => {
 });
 
 // render form to add a product
-router.get('/admin/products/add', (req, res) => {
+router.get('/admin/products/add', isAuthenticated, (req, res) => {
   res.send(addProductView({}));
 });
 
