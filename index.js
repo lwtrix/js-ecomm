@@ -15,8 +15,8 @@ server.use(
   })
 );
 
-server.use('/admin/auth', adminAuthRouter)
-server.use('/admin/products', adminProductsRouter)
+server.use('/', adminAuthRouter)
+server.use('/', adminProductsRouter)
 
 server.listen(3001, () => {
   console.log('ECOMM Server Status: Live (PORT: 3001)');

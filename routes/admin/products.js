@@ -12,20 +12,20 @@ const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // get all products
-router.get('/', async (req, res) => {
+router.get('/admin/products', async (req, res) => {
   const products = await Products.getAll();
 
   res.send(productsIndexView({ products }))
 });
 
 // render form to add a product
-router.get('/add', (req, res) => {
+router.get('/admin/products/add', (req, res) => {
   res.send(addProductView({}));
 });
 
 // add a product
 router.post(
-  '/add',
+  '/admin/products/add',
   upload.single('productImage'),
   [requireProductName, requireProductPrice],
   handleValErrors(addProductView),
@@ -35,7 +35,7 @@ router.post(
 
     await Products.create({ productName, productPrice, image });
 
-    res.send('success');
+    res.redirect('/admin/products')
   }
 );
 

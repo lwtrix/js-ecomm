@@ -21,7 +21,7 @@ router.get('/signup', (req, res) => {
 });
 
 router.post(
-  '/signup',
+  '/admin/signup',
   [requireEmail, requirePassword, requirePasswordConfirm],
   handleValErrors(signUpView),
   async (req, res) => {
@@ -30,27 +30,27 @@ router.post(
     const user = await Admins.create({ email, password });
     req.session.user = user.id;
 
-    res.send('account created');
+    res.redirect('/admin/products')
   }
 );
 
-router.get('/signin', (req, res) => {
+router.get('/admin/signin', (req, res) => {
   res.send(signInView({}));
 });
 
 router.post(
-  '/signin',
+  '/admin/signin',
   [checkEmailExists, checkPassword],
   handleValErrors(signInView),
   async (req, res) => {
-    res.send('authenticated');
+    res.redirect('/admin/products')
   }
 );
 
-router.get('/signout', (req, res) => {
+router.get('/admin/signout', (req, res) => {
   req.session = null;
 
-  res.redirect('/signin');
+  res.redirect('/admin/signin');
 });
 
 module.exports = router;
