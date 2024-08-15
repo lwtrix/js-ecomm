@@ -1,5 +1,5 @@
 const express = require('express');
-const { handleValErrors } = require('../../middleware/admin/index');
+const { handleValErrors, isAuthenticated } = require('../../middleware/admin/index');
 const multer = require('multer');
 
 const Products = require('../../repositories/products');
@@ -12,7 +12,7 @@ const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // get all products
-router.get('/admin/products', async (req, res) => {
+router.get('/admin/products', isAuthenticated, async (req, res) => {
   const products = await Products.getAll();
 
   res.send(productsIndexView({ products }))
@@ -26,6 +26,7 @@ router.get('/admin/products/add', (req, res) => {
 // add a product
 router.post(
   '/admin/products/add',
+  isAuthenticated,
   upload.single('productImage'),
   [requireProductName, requireProductPrice],
   handleValErrors(addProductView),

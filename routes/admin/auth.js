@@ -43,6 +43,11 @@ router.post(
   [checkEmailExists, checkPassword],
   handleValErrors(signInView),
   async (req, res) => {
+    const { email } = req.body
+
+    const user = await Admins.getOneBy({ email })
+    req.session.user = user.id
+
     res.redirect('/admin/products')
   }
 );

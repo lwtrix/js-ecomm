@@ -9,7 +9,14 @@ module.exports = {
         return res.send(viewTemplateFunc({ errors }));
       }
 
-      next(); 
+      next();
     };
+  },
+  isAuthenticated(req, res, next) {
+    if (!req.session.user) {
+      return res.redirect('/admin/signin');
+    }
+
+    next();
   },
 };
