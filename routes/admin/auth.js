@@ -16,7 +16,7 @@ const signUpView = require('../../views/admin/auth/signup.js');
 
 const router = express.Router();
 
-router.get('/signup', (req, res) => {
+router.get('/admin/signup', (req, res) => {
   res.send(signUpView({ req }));
 });
 
