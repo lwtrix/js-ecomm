@@ -9,10 +9,10 @@ module.exports = ({ products }) => {
         <td>${product.productName}</td>
         <td>${product.productPrice}</td>
         <td>
-          <button class="btn btn-success">Edit</button>
+          <a class="btn btn-success" href="/admin/products/${product.id}/edit">Edit</a>
         </td>
         <td>
-          <button class="btn btn-danger">Delete</button>
+          <a class="btn btn-danger">Delete</a>
         </td>
       </tr>
     `;
