@@ -88,7 +88,7 @@ class BaseRepository {
     const foundRecord = recordsArr.find((record) => record.id === id);
 
     if (!foundRecord) {
-      throw new Error(`Admin with id: ${id} was not found`);
+      throw new Error(`Record with id: ${id} was not found`);
     }
 
     Object.assign(foundRecord, updatedAttrs);
