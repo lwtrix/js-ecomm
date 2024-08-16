@@ -22,7 +22,10 @@ module.exports = ({ products }) => {
   return layout({
     content: `
     <div class="mt-5">
-      <h1>Products</h1>
+    <div class="d-flex justify-content-between align-items-center">
+      <p class="h4">Products</p>
+      <a class="btn btn-primary mt-2" href="/admin/products/add">Add Product</a>
+    </div>
       <table class="table mt-4">
         <thead class="table-dark"
           <tr>
@@ -37,6 +40,7 @@ module.exports = ({ products }) => {
           ${renderedProducts}        
         </tbody>
       </table>
+
     </div>
     `,
   });
