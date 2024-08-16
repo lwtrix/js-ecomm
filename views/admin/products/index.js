@@ -21,7 +21,7 @@ module.exports = ({ products }) => {
 
   return layout({
     content: `
-    <div class="container mt-5">
+    <div class="mt-5">
       <h1>Products</h1>
       <table class="table mt-4">
         <thead class="table-dark"

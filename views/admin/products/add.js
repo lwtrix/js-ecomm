@@ -4,7 +4,7 @@ const layout = require('../layout');
 module.exports = ({ errors }) => {
   return layout({
     content: `
-      <div class="container mt-5">
+      <div class="mt-5">
         <form method="POST" enctype="multipart/form-data" class="col-lg-6 col-12 mx-auto">
 
           <div class="mb-2">

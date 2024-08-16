@@ -5,7 +5,7 @@ module.exports = ({ errors }) => {
   return layout({
     content: `
     <div class="col-lg-4 col-12 mx-auto mt-5">
-      <h1>Sign in</h1>
+      <h3>Sign in</h3>
       <form method="POST">
 
         <div class="mb-2 mt-4">
