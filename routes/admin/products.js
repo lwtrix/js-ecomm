@@ -44,8 +44,8 @@ router.post(
   }
 );
 
-// get a single product
-router.get('/admin/products/:id/edit', async (req, res) => {
+// render form to edit a product
+router.get('/admin/products/:id/edit', isAuthenticated, async (req, res) => {
   const { id } = req.params;
 
   const product = await Products.getOneById(id);
@@ -57,8 +57,31 @@ router.get('/admin/products/:id/edit', async (req, res) => {
   res.send(editProductView({ product }));
 });
 
-// render form to edit a product
-router.get('/edit/:id', (req, res) => {});
+router.post(
+  '/admin/products/:id/edit',
+  isAuthenticated,
+  upload.single('productImage'),
+  [requireProductName, requireProductPrice],
+  handleValErrors(editProductView, async (req) => {
+    const product = await Products.getOneById(req.params.id)
+    return { product }
+  }),
+  async (req, res) => {
+    const editedProduct = req.body;
+
+    if (req.file) {
+      editedProduct.productImage = req.file.buffer.toString('base64');
+    }
+
+    try {
+      await Products.update(req.params.id, editedProduct);
+    } catch(err) {
+      res.redirect('/admin/products')
+    }
+
+    res.redirect('/admin/products')
+  }
+);
 
 // edit a product
 router.put('/:id', (req, res) => {});
