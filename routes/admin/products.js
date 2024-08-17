@@ -63,8 +63,8 @@ router.post(
   upload.single('productImage'),
   [requireProductName, requireProductPrice],
   handleValErrors(editProductView, async (req) => {
-    const product = await Products.getOneById(req.params.id)
-    return { product }
+    const product = await Products.getOneById(req.params.id);
+    return { product };
   }),
   async (req, res) => {
     const editedProduct = req.body;
@@ -75,18 +75,19 @@ router.post(
 
     try {
       await Products.update(req.params.id, editedProduct);
-    } catch(err) {
-      res.redirect('/admin/products')
+    } catch (err) {
+      res.redirect('/admin/products');
     }
 
-    res.redirect('/admin/products')
+    res.redirect('/admin/products');
   }
 );
 
-// edit a product
-router.put('/:id', (req, res) => {});
-
 // remove a product
-router.delete('/:id', (req, res) => {});
+router.post('/admin/products/:id/delete', isAuthenticated, async (req, res) => {
+  await Products.delete(req.params.id);
+
+  res.redirect('/admin/products')
+});
 
 module.exports = router;
