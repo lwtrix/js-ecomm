@@ -3,6 +3,7 @@ const cookieSession = require('cookie-session');
 
 const adminAuthRouter = require('./routes/admin/auth.js')
 const adminProductsRouter = require('./routes/admin/products.js')
+const productsRouter = require('./routes/products.js')
 
 const server = express();
 
@@ -17,6 +18,7 @@ server.use(
 
 server.use('/', adminAuthRouter)
 server.use('/', adminProductsRouter)
+server.use('/', productsRouter)
 
 server.listen(3001, () => {
   console.log('ECOMM Server Status: Live (PORT: 3001)');

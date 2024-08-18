@@ -52,7 +52,7 @@ module.exports = {
     }),
   requireProductName: check('productName')
     .trim()
-    .isLength({ min: 3, max: 36 })
+    .isLength({ min: 3, max: 48 })
     .withMessage('Please enter a name between 3 and 36 characters'),
   requireProductPrice: check('productPrice')
     .trim()
