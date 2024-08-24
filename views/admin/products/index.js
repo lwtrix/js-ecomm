@@ -29,7 +29,7 @@ module.exports = ({ products }) => {
       <a class="btn btn-primary mt-2" href="/admin/products/add">Add Product</a>
     </div>
       <table class="table mt-4">
-        <thead class="table-dark"
+        <thead class="table-dark">
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>

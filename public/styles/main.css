@@ -7,6 +7,9 @@ html, body {
   box-sizing: border-box;
 }
 
+/* ************* */
+/* PRODUCTS STYLES */
+/* ************* */
 
 .products-list .card-img-container {
   width: 100%;
@@ -45,4 +48,18 @@ html, body {
     margin-bottom: 1%;
     width: 24%;
   }
+}
+
+/* ************* */
+/* CART STYLES */
+/* ************* */
+
+.cart {
+  margin-top: 60px;
+}
+
+.cart .cart-items .item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
 }
