@@ -1,6 +1,9 @@
 const express = require('express');
 
 const CartRepository = require('../repositories/carts');
+const ProductsRepository = require('../repositories/products')
+
+const cartIndexView = require('../views/cart/index')
 
 const router = express.Router();
 
@@ -31,6 +34,21 @@ router.post('/cart/:productId', async (req, res) => {
 });
 
 // retrieve and render cart content
-router.get('/', (req, res) => {});
+router.get('/cart', async (req, res) => {
+  const cart = await CartRepository.getOneById(req.session.cart)
+
+  const itemsIds = cart.items.map(item => item.id)
+  const cartItems = await ProductsRepository.getMany({ id: [...itemsIds]})
+
+  for(let item of cart.items) {
+    for(let cartItem of cartItems) {
+      if(item.id === cartItem.id) {
+        cartItem.quantity = item.quantity
+      }
+    }
+  }
+
+  res.send(cartIndexView({ items: cartItems }))
+});
 
 module.exports = router;
