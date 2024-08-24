@@ -1,6 +1,5 @@
-const { randomBytes } = require('crypto')
+const { randomBytes } = require('crypto');
 const fs = require('fs');
-
 
 class BaseRepository {
   constructor(filename) {
@@ -24,6 +23,26 @@ class BaseRepository {
         encoding: 'utf8',
       })
     );
+  }
+
+  // retrieve many records based on multiple attributes
+  async getMany(filters) {
+    const recordsArr = await this.getAll();
+
+    return recordsArr.filter((record) => {
+      for (let key in filters) {
+        if (Array.isArray(filters[key])) {
+          if (!filters[key].includes(record[key])) {
+            return false;
+          }
+        } else {
+          if (filters[key] !== record[key]) {
+            return false;
+          }
+        }
+      }
+      return true;
+    });
   }
 
   // write to records
@@ -65,14 +84,14 @@ class BaseRepository {
 
   // create new record
   async create(props) {
-    const id = randomBytes(4).toString('hex')
-    const recordsArr = await this.getAll()
+    const id = randomBytes(4).toString('hex');
+    const recordsArr = await this.getAll();
 
-    const newRecord = { ...props, id }
-    recordsArr.push(newRecord)
-    this.writeAll(recordsArr)
+    const newRecord = { ...props, id };
+    recordsArr.push(newRecord);
+    this.writeAll(recordsArr);
 
-    return newRecord
+    return newRecord;
   }
 
   // delete a single record
