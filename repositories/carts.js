@@ -1,5 +1,5 @@
 const BaseRepository = require('./baseRepo');
 
-class CartRepository extends BaseRepository {}
+class CartsRepository extends BaseRepository {}
 
-module.exports = new CartRepository('carts.json');
+module.exports = new CartsRepository('carts.json');
