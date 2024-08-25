@@ -1,9 +1,9 @@
 const express = require('express');
 
 const CartRepository = require('../repositories/carts');
-const ProductsRepository = require('../repositories/products')
+const ProductsRepository = require('../repositories/products');
 
-const cartIndexView = require('../views/cart/index')
+const cartIndexView = require('../views/cart/index');
 
 const router = express.Router();
 
@@ -35,54 +35,70 @@ router.post('/cart/:productId', async (req, res) => {
 
 // retrieve and render cart content
 router.get('/cart', async (req, res) => {
-  if(!req.session.cart) {
-    res.send('Cart empty')
+  if (!req.session.cart) {
+    res.send('Cart empty');
   }
 
-  const cart = await CartRepository.getOneById(req.session.cart)
+  const cart = await CartRepository.getOneById(req.session.cart);
 
-  const itemsIds = cart.items.map(item => item.id)
-  const cartItems = await ProductsRepository.getMany({ id: [...itemsIds]})
+  const itemsIds = cart.items.map((item) => item.id);
+  const cartItems = await ProductsRepository.getMany({ id: [...itemsIds] });
 
-  for(let item of cart.items) {
-    for(let cartItem of cartItems) {
-      if(item.id === cartItem.id) {
-        cartItem.quantity = item.quantity
+  for (let item of cart.items) {
+    for (let cartItem of cartItems) {
+      if (item.id === cartItem.id) {
+        cartItem.quantity = item.quantity;
       }
     }
   }
 
-  res.send(cartIndexView({ items: cartItems }))
+  res.send(cartIndexView({ items: cartItems }));
 });
 
 router.post('/cart/:productId/increase', async (req, res) => {
-  if(!req.session.cart) {
-    res.send('cart empty')
+  if (!req.session.cart) {
+    res.send('cart empty');
   }
 
-  const cart = await CartRepository.getOneById(req.session.cart)
+  const cart = await CartRepository.getOneById(req.session.cart);
 
-  const item = cart.items.find(item => item.id === req.params.productId)
-  item.quantity++
+  const item = cart.items.find((item) => item.id === req.params.productId);
+  item.quantity++;
 
-  await CartRepository.update(req.session.cart, { items: cart.items })
+  await CartRepository.update(req.session.cart, { items: cart.items });
 
-  res.redirect('/cart')
-})
+  res.redirect('/cart');
+});
 
 router.post('/cart/:productId/decrease', async (req, res) => {
-  if(!req.session.cart) {
-    res.send('cart empty')
+  if (!req.session.cart) {
+    res.send('cart empty');
   }
 
-  const cart = await CartRepository.getOneById(req.session.cart)
+  const cart = await CartRepository.getOneById(req.session.cart);
 
-  const item = cart.items.find(item => item.id === req.params.productId)
-  item.quantity--
+  const item = cart.items.find((item) => item.id === req.params.productId);
+  item.quantity--;
 
-  await CartRepository.update(req.session.cart, { items: cart.items })
+  await CartRepository.update(req.session.cart, { items: cart.items });
+
+  res.redirect('/cart');
+});
+
+router.post('/cart/:productId/delete', async (req, res) => {
+  if (!req.session.cart) {
+    res.send('cart empty');
+  }
+
+  const cart = await CartRepository.getOneById(req.session.cart);
+
+  const updatedItems = cart.items.filter(
+    (item) => item.id !== req.params.productId
+  );
+
+  await CartRepository.update(req.session.cart, { items: updatedItems });
 
   res.redirect('/cart')
-})
+});
 
 module.exports = router;
