@@ -35,6 +35,10 @@ router.post('/cart/:productId', async (req, res) => {
 
 // retrieve and render cart content
 router.get('/cart', async (req, res) => {
+  if(!req.session.cart) {
+    res.send('Cart empty')
+  }
+
   const cart = await CartRepository.getOneById(req.session.cart)
 
   const itemsIds = cart.items.map(item => item.id)
@@ -50,5 +54,35 @@ router.get('/cart', async (req, res) => {
 
   res.send(cartIndexView({ items: cartItems }))
 });
+
+router.post('/cart/:productId/increase', async (req, res) => {
+  if(!req.session.cart) {
+    res.send('cart empty')
+  }
+
+  const cart = await CartRepository.getOneById(req.session.cart)
+
+  const item = cart.items.find(item => item.id === req.params.productId)
+  item.quantity++
+
+  await CartRepository.update(req.session.cart, { items: cart.items })
+
+  res.redirect('/cart')
+})
+
+router.post('/cart/:productId/decrease', async (req, res) => {
+  if(!req.session.cart) {
+    res.send('cart empty')
+  }
+
+  const cart = await CartRepository.getOneById(req.session.cart)
+
+  const item = cart.items.find(item => item.id === req.params.productId)
+  item.quantity--
+
+  await CartRepository.update(req.session.cart, { items: cart.items })
+
+  res.redirect('/cart')
+})
 
 module.exports = router;
