@@ -8,12 +8,22 @@ module.exports = ({ items }) => {
           `
         <tr>
           <th scope="row">
-            <img src="data:image/png;base64, ${item.productImage}" class="item-img">
+            <img src="data:image/png;base64, ${
+              item.productImage
+            }" class="item-img">
           </th>
           <td><strong>${item.productName}</strong></td>
           <td>£${item.productPrice * item.quantity}</td>
           <td>
-            ${item.quantity}
+            <div class="d-flex align-items-center">
+              <form method="POST" action="/cart/${item.id}/increase">
+                <button><</button>
+              </form>  
+              <span class="mx-2">${item.quantity}</span>
+              <form method="POST" action="/cart/${item.id}/decrease">
+                <button ${item.quantity < 2 ? 'disabled' : ''}>></button>
+              </form>
+            </div>
           </td>
           <td>
           <form method="POST" action="/cart/${item.id}/delete">
