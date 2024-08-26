@@ -63,3 +63,7 @@ html, body {
   height: 80px;
   object-fit: contain;
 }
+
+.cart-empty {
+  margin-top: 120px;
+}
