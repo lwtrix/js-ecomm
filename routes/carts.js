@@ -4,6 +4,7 @@ const CartRepository = require('../repositories/carts');
 const ProductsRepository = require('../repositories/products');
 
 const cartIndexView = require('../views/cart/index');
+const { updateCartQuantity } = require('../lib/routes/cart');
 
 const router = express.Router();
 
@@ -36,7 +37,7 @@ router.post('/cart/:productId', async (req, res) => {
 // retrieve and render cart content
 router.get('/cart', async (req, res) => {
   if (!req.session.cart) {
-    res.send('Cart empty');
+    return res.send('Cart empty');
   }
 
   const cart = await CartRepository.getOneById(req.session.cart);
@@ -57,15 +58,10 @@ router.get('/cart', async (req, res) => {
 
 router.post('/cart/:productId/increase', async (req, res) => {
   if (!req.session.cart) {
-    res.send('cart empty');
+    return res.send('cart empty');
   }
 
-  const cart = await CartRepository.getOneById(req.session.cart);
-
-  const item = cart.items.find((item) => item.id === req.params.productId);
-  item.quantity++;
-
-  await CartRepository.update(req.session.cart, { items: cart.items });
+  updateCartQuantity(req.session.cart, req.params.productId, true)
 
   res.redirect('/cart');
 });
@@ -75,19 +71,14 @@ router.post('/cart/:productId/decrease', async (req, res) => {
     res.send('cart empty');
   }
 
-  const cart = await CartRepository.getOneById(req.session.cart);
-
-  const item = cart.items.find((item) => item.id === req.params.productId);
-  item.quantity--;
-
-  await CartRepository.update(req.session.cart, { items: cart.items });
+  updateCartQuantity(req.session.cart, req.params.productId, false)
 
   res.redirect('/cart');
 });
 
 router.post('/cart/:productId/delete', async (req, res) => {
   if (!req.session.cart) {
-    res.send('cart empty');
+    return res.send('cart empty');
   }
 
   const cart = await CartRepository.getOneById(req.session.cart);
