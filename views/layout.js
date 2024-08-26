@@ -5,6 +5,7 @@ module.exports = ({ content }) => {
       <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="/styles/main.css"/>
+        <link rel="stylesheet" href="/fonts/bootstrap-icons.css">
       </head>
         <body>
           <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
@@ -14,13 +15,13 @@ module.exports = ({ content }) => {
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Shop</a>
+                    <a class="nav-link active fs-5" aria-current="page" href="/">Shop</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin/products">
-                      <i class="fa-solid fa-cart-shopping"></i>
+                  <li class="nav-item ms-3">
+                    <a class="nav-link active" aria-current="page" href="/cart">
+                      <i class="bi bi-cart" style="font-size: 1.5rem"></i>
                     </a>
                   </li>
                 </ul>
