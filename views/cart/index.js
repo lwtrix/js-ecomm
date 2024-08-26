@@ -17,11 +17,15 @@ module.exports = ({ items }) => {
           <td>
             <div class="d-flex align-items-center">
               <form method="POST" action="/cart/${item.id}/increase">
-                <button><</button>
+                <button class="btn">
+                  <i class="bi bi-caret-left-fill"></i>
+                </button>
               </form>  
               <span class="mx-2">${item.quantity}</span>
               <form method="POST" action="/cart/${item.id}/decrease">
-                <button ${item.quantity < 2 ? 'disabled' : ''}>></button>
+                <button  class="btn" ${item.quantity < 2 ? 'disabled' : ''}>
+                  <i class="bi bi-caret-right-fill"></i>
+                </button>
               </form>
             </div>
           </td>
