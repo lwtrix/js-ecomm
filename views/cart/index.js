@@ -1,7 +1,13 @@
 const layout = require('../layout');
 
 module.exports = ({ items }) => {
-  const renderedItems = () => {
+  const renderTotalPrice = () => {
+    return items.reduce((total, item) => {
+      return total+= item.quantity * item.productPrice;
+    }, 0)
+  }
+
+  const renderItems = () => {
     return items
       .map(
         (item) =>
@@ -55,9 +61,19 @@ module.exports = ({ items }) => {
               </tr>
             </thead>
             <tbody>
-              ${renderedItems()}
+              ${renderItems()}
             </tbody>
           </table>
+
+          <div class="order-summary d-flex justify-content-between align-items-center mt-4">
+            <form action="/">
+              <button class="btn btn-primary">Keep Shopping</button>
+            </form>
+            <div class="d-flex align-items-center mx-5">
+              <p class="fs-2 m-0 p-0 fw-light">Total:</p>
+              <p class="ms-4 fs-2 m-0 fw-semibold">£${renderTotalPrice()}</p>
+            </div>
+          </div>
         </div>
       </div>
     `,

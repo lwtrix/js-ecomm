@@ -34,7 +34,12 @@
     "id": "0e9c000a"
   },
   {
-    "items": [],
+    "items": [
+      {
+        "id": "e7fccbd5",
+        "quantity": 4
+      }
+    ],
     "id": "f4a6cdd3"
   }
 ]
