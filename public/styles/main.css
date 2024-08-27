@@ -7,13 +7,23 @@ html, body {
   box-sizing: border-box;
 }
 
+button {
+  box-shadow: none;
+}
+
 button:disabled {
   border: none;
+  opacity: .35 !important;
 }
 
 button:focus {
   outline: none;
   border: none;
+}
+
+button:focus-within {
+  outline: transparent;
+  border: transparent;
 }
 
 /* ************* */
