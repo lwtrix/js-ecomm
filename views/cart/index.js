@@ -73,14 +73,14 @@ module.exports = ({ items }) => {
             </tbody>
           </table>
 
-          <div class="order-summary d-flex justify-content-between align-items-center mt-4">
-            <form action="/">
-              <button class="btn btn-primary">Keep Shopping</button>
-            </form>
-            <div class="d-flex align-items-center mx-5">
+          <div class="cart-summary d-flex justify-content-between align-items-center mt-5">
+            <div class="d-flex align-items-center ms-3">
               <p class="fs-2 m-0 p-0 fw-light">Total:</p>
               <p class="ms-4 fs-2 m-0 fw-semibold">£${renderTotalPrice()}</p>
             </div>
+            <form action="/checkout" method="POST" class="me-3">
+              <button class="btn btn-success">Checkout</button>
+            </form>
           </div>
         </div>
       </div>
