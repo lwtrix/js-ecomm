@@ -3,6 +3,7 @@ const cookieSession = require('cookie-session');
 
 const adminAuthRouter = require('./routes/admin/auth.js');
 const adminProductsRouter = require('./routes/admin/products.js');
+const adminOrdersRouter = require('./routes/admin/orders.js')
 const productsRouter = require('./routes/products.js');
 const cartsRouter = require('./routes/carts.js');
 const ordersRouter = require('./routes/orders.js');
@@ -20,6 +21,7 @@ server.use(
 
 server.use('/', adminAuthRouter);
 server.use('/', adminProductsRouter);
+server.use('/', adminOrdersRouter)
 server.use('/', productsRouter);
 server.use('/', cartsRouter);
 server.use('/', ordersRouter);
