@@ -221,5 +221,42 @@ button:focus-within {
   }
 }
 
+/* ************* */
+/* DASHBOARD STYLES */
+/* ************* */
 
+.dashboard-container {
+  padding-left: 6.5rem;
+  padding-top: 6rem;
+  background-color: rgb(241, 241, 241);
+  width: 1112px;
+}
+
+.dashboard-container .stats-container {
+  margin-top: 48px;
+}
+
+.dashboard-container .stats-container .stat-card {
+  width: 272px;
+  height: 156px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: white;
+  margin-right: 32px;
+  border-radius: 8px;
+}
+
+.dashboard-container .stats-container .stat-card .label {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-size: 12px;
+}
+
+.dashboard-container .stats-container .stat-card .value {
+  font-size: 32px;
+  font-weight: 600;
+}
 
