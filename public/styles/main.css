@@ -246,6 +246,9 @@ button:focus-within {
   background-color: white;
   margin-right: 32px;
   border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.138),
+              -3px -3px 10px rgba(0, 0, 0, 0.138)  ;
 }
 
 .dashboard-container .stats-container .stat-card .label {
