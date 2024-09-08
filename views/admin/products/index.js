@@ -29,7 +29,7 @@ module.exports = ({ products }) => {
     page: 'products',
     content: `
     <div class="products-view">
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center" style="width: 95%">
         <p class="h4">Products</p>
         <a class="btn btn-primary mt-2" href="/admin/products/add">Add Product</a>
       </div>
