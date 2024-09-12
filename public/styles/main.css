@@ -5,6 +5,7 @@
 
 html, body {
   box-sizing: border-box;
+  background-color: rgb(235,235,235);
 }
 
 button {
@@ -165,12 +166,29 @@ button:focus-within {
 .admin-layout nav {
   width: 328px;
   height: 100vh;
-  background-color: rgb(235,235,235);
+  background-color: rgb(253, 253, 253);
+  padding-top: 52px;
+}
+
+.admin-layout nav .nav-logo {
+  margin-left: 48px;
+}
+
+.admin-layout nav .nav-logo .logo {
+  color:#f8c630;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.admin-layout nav .nav-logo .label {
+  font-size: 18px;
+  font-weight: 300;
 }
 
 .admin-layout nav .nav-items-container {
   width: 242px;
-  margin-top: 137px;
+  margin-top: 80px;
 }
 
 .admin-layout nav .nav-items-container .nav-item {
@@ -182,17 +200,17 @@ button:focus-within {
   margin-bottom: 8px;
   padding-left: 12px;
   text-decoration: none;
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(230, 230, 230);
   color: black;
 }
 
 .admin-layout nav .nav-items-container .nav-item:hover {
-  background-color: white;
+  background-color: #f8c630b9;
   transition: background-color .2s ease;
 }
 
 .admin-layout nav .nav-items-container .nav-item.active {
-  background-color: white;
+  background-color: #f8c630;
   border: 1px solid rgba(0, 0, 0, 0.624);
 }
 
@@ -221,22 +239,31 @@ button:focus-within {
   }
 }
 
+.admin-layout .dashboard-view,
+.admin-layout .products-view {
+  padding-top: 4rem;
+  background-color: rgb(241, 241, 241);
+  width: 1112px;
+  margin: 0 auto;
+}
+
 /* ************* */
 /* DASHBOARD STYLES */
 /* ************* */
 
-.dashboard-container {
-  padding-left: 6.5rem;
-  padding-top: 6rem;
-  background-color: rgb(241, 241, 241);
-  width: 1112px;
+.admin-view-wrapper {
+  background-color: rgb(253, 253, 253);
+  width: 96%;
+  margin: 0 auto;
+  padding: 24px 24px;
+  border-radius: 12px;
 }
 
-.dashboard-container .stats-container {
+.dashboard-view .stats-container {
   margin-top: 48px;
 }
 
-.dashboard-container .stats-container .stat-card {
+.dashboard-view .stats-container .stat-card {
   width: 272px;
   height: 156px;
   display: flex;
@@ -246,20 +273,49 @@ button:focus-within {
   background-color: white;
   margin-right: 32px;
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.29);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.138),
-              -3px -3px 10px rgba(0, 0, 0, 0.138)  ;
+  border: 1px solid rgba(0, 0, 0, 0.166);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.065),
+              -3px -3px 10px rgba(0, 0, 0, 0.065)  ;
 }
 
-.dashboard-container .stats-container .stat-card .label {
+.dashboard-view .stats-container .stat-card .label {
   position: absolute;
   top: 12px;
   left: 16px;
   font-size: 12px;
 }
 
-.dashboard-container .stats-container .stat-card .value {
+.dashboard-view .stats-container .stat-card .value {
   font-size: 32px;
   font-weight: 600;
 }
 
+/* ************* */
+/* PRODUCTS INDEX STYLES */
+/* ************* */
+
+.products-view .products-container {
+  width: 95%;
+  margin-top: 48px;
+}
+
+.products-view .products-container .table-headings {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.products-view .products-container .img-container {
+  width: 50px;
+  height: 50px;
+}
+
+.products-view .products-container .img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.products-view .products-container .product-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.112);
+  padding-bottom: 6px;
+}

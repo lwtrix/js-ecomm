@@ -29,20 +29,22 @@ module.exports = ({ products }) => {
     page: 'products',
     content: `
     <div class="products-view">
-      <div class="d-flex justify-content-between align-items-center" style="width: 95%">
-        <p class="h4">Products</p>
-        <a class="btn btn-primary mt-2" href="/admin/products/add">Add Product</a>
-      </div>
-      
-      <div class="products-container d-flex flex-column justify-content-center">
-        <div class="table-headings row">
-          <div class="col-1">Image</div>
-          <div class="col-8">Name</div>
-          <div class="col-1">Price</div>
-          <div class="col-1">Edit</div>
-          <div class="col-1">Remove</div>
-        </div>  
-        ${renderedProducts}
+      <div class="admin-view-wrapper">
+        <div class="d-flex justify-content-between align-items-center" style="width: 95%">
+          <p class="h4">Products</p>
+          <a class="btn btn-primary mt-2" href="/admin/products/add">Add Product</a>
+        </div>
+        
+        <div class="products-container d-flex flex-column justify-content-center">
+          <div class="table-headings row">
+            <div class="col-1">Image</div>
+            <div class="col-8">Name</div>
+            <div class="col-1">Price</div>
+            <div class="col-1">Edit</div>
+            <div class="col-1">Remove</div>
+          </div>  
+          ${renderedProducts}
+        </div>
       </div>
     </div>
     `,

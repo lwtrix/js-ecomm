@@ -1,8 +1,11 @@
-const layout = require("./layout")
+const layout = require('./layout');
 
 module.exports = ({ stats }) => {
-  return layout({ page: 'dashboard', content: `
-    <div class="dashboard-container d-flex flex-column">
+  return layout({
+    page: 'dashboard',
+    content: `
+    <div class="dashboard-view d-flex flex-column">
+    <div class="admin-view-wrapper">
       <h3>Dashboard</h3>
       <div class="stats-container">
         <div class="d-flex align-items-center">
@@ -20,6 +23,8 @@ module.exports = ({ stats }) => {
           </div>
         </div>
       </div>
+    </div>
     </div>  
-  `})
-}
+  `,
+  });
+};
