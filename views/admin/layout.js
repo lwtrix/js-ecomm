@@ -10,7 +10,11 @@ module.exports = ({ content, page }) => {
       </head>
         <body>
           <div class="admin-layout container d-flex">
-            <nav class="d-flex justify-content-center">
+            <nav class="d-flex flex-column align-items-center">
+              <div class="nav-brand align-self-start nav-logo d-flex flex-column">
+                <span class="logo">Monk Store</span>
+                <span class="label">Admin Panel</span>
+              </div>
               <div class="nav-items-container d-flex flex-column">
                 <a href="/admin/dashboard" class="nav-item ${page === 'dashboard' ? 'active' : ''}">
                   <div class="icon-container">
