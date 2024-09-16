@@ -48,11 +48,11 @@ router.post(
     const user = await Admins.getOneBy({ email })
     req.session.user = user.id
 
-    res.redirect('/admin/products')
+    res.redirect('/admin/dashboard')
   }
 );
 
-router.get('/admin/signout', (req, res) => {
+router.post('/admin/signout', (req, res) => {
   req.session = null;
 
   res.redirect('/admin/signin');
