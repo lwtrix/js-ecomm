@@ -8,25 +8,46 @@ html, body {
   background-color: rgb(235,235,235);
 }
 
-button {
-  box-shadow: none;
-  outline: 0;
+a {
+  text-decoration: none;
+  color: black;
 }
 
-button:disabled {
-  border: none;
-  opacity: .35 !important;
+/* ************* */
+/* CUSTOM BUTTON STYLES STYLES */
+/* ************* */
+
+.button {
+  cursor: pointer;
+  height: 49px;
+  width: 162px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(230, 230, 230);
+  border-radius: 8px;
+  color: black;
+  font-weight: 500;
 }
 
-button:focus {
-  outline: none;
-  border: none;
+.button:hover {
+  background-color: rgb(225, 225, 225);
 }
 
-button:focus-within {
-  outline: transparent;
-  border: transparent;
+.button.button-fluid {
+  width: 100%;
 }
+
+.button.button-main {
+  background-color: #f8c630;
+  color: black;
+}
+
+.button.button-main:hover {
+  background-color: #ffc929;
+}
+
+
 
 /* ************* */
 /* PRODUCTS STYLES */
@@ -87,6 +108,11 @@ button:focus-within {
 
 .cart-empty {
   margin-top: 120px;
+}
+
+.cart-empty .msg-box {
+  background-color: white;
+  border-radius: 8px;
 }
 
 /* ************* */
