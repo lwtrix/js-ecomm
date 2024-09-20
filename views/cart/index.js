@@ -79,7 +79,7 @@ module.exports = ({ items }) => {
               <p class="ms-4 fs-2 m-0 fw-semibold">£${renderTotalPrice()}</p>
             </div>
             <form action="/checkout" method="POST" class="me-3">
-              <button class="btn btn-success">Checkout</button>
+              <div class="button button-main">Checkout</div>
             </form>
           </div>
         </div>

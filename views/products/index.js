@@ -11,7 +11,7 @@ module.exports = ({ products }) => {
               <h5 class="card-title">${product.productName}</h5>
               <p class="card-text">£${product.productPrice}</p>
               <form method="POST" action="/cart/${product.id}">
-                <button class="btn btn-primary">Add To Cart</button>
+                <div data-submit class="button">Add To Cart</div>
               </form>
             </div>
           </div>`

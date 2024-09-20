@@ -17,7 +17,7 @@ module.exports = ({ products }) => {
         </div>
         <div class="col-1 d-flex align-items-center">
         <form method="POST" action="/admin/products/${product.id}/delete">
-          <button class="btn btn-danger">Delete</button>
+          <div class="btn btn-danger">Delete</div>
         </form>
         </div>
       </div>
@@ -32,7 +32,7 @@ module.exports = ({ products }) => {
       <div class="admin-view-wrapper">
         <div class="d-flex justify-content-between align-items-center" style="width: 95%">
           <p class="h4">Products</p>
-          <a class="btn btn-primary mt-2" href="/admin/products/add">Add Product</a>
+          <a class="button mt-2" href="/admin/products/add">Add Product</a>
         </div>
         
         <div class="products-container d-flex flex-column justify-content-center">
