@@ -13,11 +13,15 @@ module.exports = ({ products }) => {
         <div class="col-8 d-flex align-items-center">${product.productName}</div>
         <div class="col-1 d-flex align-items-center">£${product.productPrice}</div>
         <div class="col-1 d-flex align-items-center">
-          <a class="btn btn-success" href="/admin/products/${product.id}/edit">Edit</a>
+          <a href="/admin/products/${product.id}/edit" class="icon-wrapper">
+            <i class="bi bi-pen edit"></i>
+          </a>
         </div>
         <div class="col-1 d-flex align-items-center">
         <form method="POST" action="/admin/products/${product.id}/delete">
-          <div class="btn btn-danger">Delete</div>
+          <div class="icon-wrapper" data-submit>
+          <i class="bi bi-trash2-fill delete"></i>
+          </div>
         </form>
         </div>
       </div>
@@ -30,9 +34,12 @@ module.exports = ({ products }) => {
     content: `
     <div class="products-view">
       <div class="admin-view-wrapper">
-        <div class="d-flex justify-content-between align-items-center" style="width: 95%">
+        <div class="d-flex justify-content-between align-items-center">
           <p class="h4">Products</p>
-          <a class="button mt-2" href="/admin/products/add">Add Product</a>
+          <a class="button mt-2" href="/admin/products/add">
+            <i class="bi bi-plus-circle-fill me-3" style="font-size: 16px"></i>
+            <span>Add Product</span>
+          </a>
         </div>
         
         <div class="products-container d-flex flex-column justify-content-center">
