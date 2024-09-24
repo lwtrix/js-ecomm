@@ -55,6 +55,7 @@ a {
 .button.button-main {
   background-color: #f8c630;
   color: black;
+  border: 1px solid #e7b319;
 }
 
 .button.button-main:hover {

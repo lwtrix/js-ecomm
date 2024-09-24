@@ -43,7 +43,7 @@ module.exports = ({ errors }) => {
               </div>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-5">
               <label for="productImageField" class="form-label">Thumbnail</label>
               <div class="input-group has-validation">
                 <input name="productImage" type="file" class="form-control" id="productImageField" aria-describedby="productImageFieldFeedback">
