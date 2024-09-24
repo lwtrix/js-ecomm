@@ -28,6 +28,16 @@ module.exports = ({ errors, product }) => {
             </div>
           </div>
 
+          <div class="mb-2">
+            <label for="productCategoryField" class="form-label">Category</label>
+            <div class="input-group has-validation">
+              <input name="productCategory" type="text" value="${product.productCategory}" class="form-control ${getError(errors, 'productCategory') ? "is-invalid" : ""}" id="productCategoryField" aria-describedby="productCategoryFieldFeedback">
+              <div id="productCategoryFieldFeedback" class="invalid-feedback">
+                ${getError(errors, 'productCategory')}
+              </div>
+            </div>
+          </div>
+
           <div class="mb-4">
             <label for="productImageField" class="form-label">Thumbnail</label>
             <div class="input-group has-validation">
