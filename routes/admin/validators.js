@@ -1,7 +1,11 @@
+const PRODUCTS_CATEGORIES = ['tops', 'bottoms', 'outerwear', 'accessories']
+const PRODUCTS_GENDERS = ['men', 'women']
+
 const { check } = require('express-validator');
 const Admins = require('../../repositories/admins');
 
 module.exports = {
+  // USER COLLECTION VALIDATIONS
   requireEmail: check('email')
     .trim()
     .normalizeEmail()
@@ -50,6 +54,7 @@ module.exports = {
         throw new Error('Wrong password entered');
       }
     }),
+  // PRODUCTS COLLECTION VALIDATIONS
   requireProductName: check('productName')
     .trim()
     .isLength({ min: 3, max: 48 })
@@ -59,4 +64,13 @@ module.exports = {
     .toFloat()
     .isFloat({ min: 1 })
     .withMessage('Products must have a minimum price of £1'),
+  requireCategory: check('productCategory')
+  .trim()
+  .custom((productCategory => {
+    const categExists = PRODUCTS_CATEGORIES.find(categ => categ === productCategory.toLowerCase())
+    if(!categExists) {
+      throw new Error('Please provide an existing category')
+    }
+    return true;
+  }))
 };

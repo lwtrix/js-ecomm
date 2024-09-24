@@ -6,7 +6,7 @@ const {
 const multer = require('multer');
 
 const Products = require('../../repositories/products');
-const { requireProductName, requireProductPrice } = require('./validators');
+const { requireProductName, requireProductPrice, requireCategory } = require('./validators');
 
 const addProductView = require('../../views/admin/products/add');
 const productsIndexView = require('../../views/admin/products/index');
@@ -32,13 +32,13 @@ router.post(
   '/admin/products/add',
   isAuthenticated,
   upload.single('productImage'),
-  [requireProductName, requireProductPrice],
+  [requireProductName, requireProductPrice, requireCategory],
   handleValErrors(addProductView),
   async (req, res) => {
-    const image = req.file.buffer.toString('base64');
+    const productImage = req.file.buffer.toString('base64');
     const { productName, productPrice } = req.body;
 
-    await Products.create({ productName, productPrice, image });
+    await Products.create({ productName, productPrice,  productImage});
 
     res.redirect('/admin/products');
   }
