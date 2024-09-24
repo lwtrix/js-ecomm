@@ -36,9 +36,9 @@ router.post(
   handleValErrors(addProductView),
   async (req, res) => {
     const productImage = req.file.buffer.toString('base64');
-    const { productName, productPrice } = req.body;
+    const newProduct = req.body;
 
-    await Products.create({ productName, productPrice,  productImage});
+    await Products.create({...newProduct, productImage});
 
     res.redirect('/admin/products');
   }
@@ -61,7 +61,7 @@ router.post(
   '/admin/products/:id/edit',
   isAuthenticated,
   upload.single('productImage'),
-  [requireProductName, requireProductPrice],
+  [requireProductName, requireProductPrice, requireCategory],
   handleValErrors(editProductView, async (req) => {
     const product = await Products.getOneById(req.params.id);
     return { product };

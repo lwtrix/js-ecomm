@@ -1,4 +1,4 @@
-const PRODUCTS_CATEGORIES = ['tops', 'bottoms', 'outerwear', 'accessories']
+const PRODUCTS_CATEGORIES = ['Tops', 'Bottoms', 'Outerwear', 'Accessories' , 'Headwear', 'Dresses']
 const PRODUCTS_GENDERS = ['men', 'women']
 
 const { check } = require('express-validator');
@@ -67,7 +67,7 @@ module.exports = {
   requireCategory: check('productCategory')
   .trim()
   .custom((productCategory => {
-    const categExists = PRODUCTS_CATEGORIES.find(categ => categ === productCategory.toLowerCase())
+    const categExists = PRODUCTS_CATEGORIES.find(categ => categ.toLowerCase() === productCategory.toLowerCase())
     if(!categExists) {
       throw new Error('Please provide an existing category')
     }
