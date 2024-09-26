@@ -13,6 +13,7 @@ const addProductView = require('../../views/admin/products/add');
 const productsIndexView = require('../../views/admin/products/index');
 const editProductView = require('../../views/admin/products/edit');
 const sharp = require('sharp');
+const { optimizeAndSaveImage } = require('../../lib/images/utils');
 
 const router = express.Router();
 
@@ -40,22 +41,12 @@ router.post(
   handleValErrors(addProductView),
   async (req, res) => {
     const filename = `${Date.now()}-${req.file.originalname}`
-    const outputPath = path.join(__dirname, '../../public/uploads', filename)
 
-    try {
-      await sharp(req.file.buffer)
-        .resize(800)
-        .jpeg({ quality: 80 })
-        .toFile(outputPath)
-    } catch (error) {
-      console.log('Error processing image optimization', error)
-      return res.send('Error optimizing image')
-    }
-
+    const productImage = await optimizeAndSaveImage(req.file.buffer, filename)
 
     const newProduct = {
       ...req.body,
-      productImage: `/uploads/${filename}`
+      productImage
     };
 
     await Products.create(newProduct);
