@@ -12,20 +12,12 @@ const { requireProductName, requireProductPrice, requireCategory } = require('./
 const addProductView = require('../../views/admin/products/add');
 const productsIndexView = require('../../views/admin/products/index');
 const editProductView = require('../../views/admin/products/edit');
+const sharp = require('sharp');
 
 const router = express.Router();
 
-const multerStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/uploads')
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + path.extname(file.originalname)
-    cb(null, uniqueSuffix)
-  }
-})
-
-const upload = multer({ storage: multerStorage });
+const storage = multer.memoryStorage()
+const upload = multer({ storage });
 
 // get all products
 router.get('/admin/products', isAuthenticated, async (req, res) => {
@@ -47,10 +39,26 @@ router.post(
   [requireProductName, requireProductPrice, requireCategory],
   handleValErrors(addProductView),
   async (req, res) => {
-    const productImage = `/uploads/${req.file.filename}`;
-    const newProduct = req.body;
+    const filename = `${Date.now()}-${req.file.originalname}`
+    const outputPath = path.join(__dirname, '../../public/uploads', filename)
 
-    await Products.create({...newProduct, productImage});
+    try {
+      await sharp(req.file.buffer)
+        .resize(800)
+        .jpeg({ quality: 80 })
+        .toFile(outputPath)
+    } catch (error) {
+      console.log('Error processing image optimization', error)
+      return res.send('Error optimizing image')
+    }
+
+
+    const newProduct = {
+      ...req.body,
+      productImage: `/uploads/${filename}`
+    };
+
+    await Products.create(newProduct);
 
     return res.redirect('/admin/products');
   }
