@@ -4,6 +4,7 @@ const {
   isAuthenticated,
 } = require('../../middleware/admin/index');
 const multer = require('multer');
+const path = require('path')
 
 const Products = require('../../repositories/products');
 const { requireProductName, requireProductPrice, requireCategory } = require('./validators');
@@ -13,18 +14,29 @@ const productsIndexView = require('../../views/admin/products/index');
 const editProductView = require('../../views/admin/products/edit');
 
 const router = express.Router();
-const upload = multer({ storage: multer.memoryStorage() });
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads')
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + path.extname(file.originalname)
+    cb(null, uniqueSuffix)
+  }
+})
+
+const upload = multer({ storage: multerStorage });
 
 // get all products
 router.get('/admin/products', isAuthenticated, async (req, res) => {
   const products = await Products.getAll();
 
-  res.send(productsIndexView({ products }));
+  return res.send(productsIndexView({ products }));
 });
 
 // render form to add a product
 router.get('/admin/products/add', isAuthenticated, (req, res) => {
-  res.send(addProductView({}));
+  return res.send(addProductView({}));
 });
 
 // add a product
@@ -35,12 +47,12 @@ router.post(
   [requireProductName, requireProductPrice, requireCategory],
   handleValErrors(addProductView),
   async (req, res) => {
-    const productImage = req.file.buffer.toString('base64');
+    const productImage = `/uploads/${req.file.filename}`;
     const newProduct = req.body;
 
     await Products.create({...newProduct, productImage});
 
-    res.redirect('/admin/products');
+    return res.redirect('/admin/products');
   }
 );
 
@@ -54,7 +66,7 @@ router.get('/admin/products/:id/edit', isAuthenticated, async (req, res) => {
     return res.send('Product does not exist');
   }
 
-  res.send(editProductView({ product }));
+  return res.send(editProductView({ product }));
 });
 
 router.post(
@@ -76,10 +88,10 @@ router.post(
     try {
       await Products.update(req.params.id, editedProduct);
     } catch (err) {
-      res.redirect('/admin/products');
+      return res.redirect('/admin/products');
     }
 
-    res.redirect('/admin/products');
+    return res.redirect('/admin/products');
   }
 );
 
@@ -87,7 +99,7 @@ router.post(
 router.post('/admin/products/:id/delete', isAuthenticated, async (req, res) => {
   await Products.delete(req.params.id);
 
-  res.redirect('/admin/products')
+  return res.redirect('/admin/products')
 });
 
 module.exports = router;

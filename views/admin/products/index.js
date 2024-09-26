@@ -7,7 +7,7 @@ module.exports = ({ products }) => {
       <div class="product-row row my-1">
         <div class="col-1 d-flex align-items-center">
           <div class="img-container">
-            <img src="data:image/png;base64, ${product.productImage}"/>
+            <img src="${product.productImage}"/>
           </div>
         </div>
         <div class="col-8 d-flex align-items-center">${product.productName}</div>
