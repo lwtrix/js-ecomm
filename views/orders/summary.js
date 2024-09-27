@@ -32,7 +32,7 @@ module.exports = ({ order }) => {
       `
         <div class="row order-item">
           <div class="col-2 d-flex justify-content-center">
-            <img src="data:image/png;base64, ${item.image}"/>
+            <img src="${item.image}"/>
           </div>
           <div class="col-6 d-flex align-items-center">
             <span class="fw-medium">${item.name}</span>

@@ -14,9 +14,7 @@ module.exports = ({ items }) => {
           `
         <tr>
           <th scope="row">
-            <img src="data:image/png;base64, ${
-              item.productImage
-            }" class="item-img">
+            <img src="${item.productImage}" class="item-img">
           </th>
           <td>
             <div class="mt-3">

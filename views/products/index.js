@@ -6,7 +6,7 @@ module.exports = ({ products }) => {
       .map(
         (product) =>
           `<div class="card">
-            <img src="data:image/png;base64, ${product.productImage}" class="card-img-top img-fluid">
+            <img src="${product.productImage}" class="card-img-top img-fluid">
             <div class="card-body">
               <h5 class="card-title">${product.productName}</h5>
               <p class="card-text">£${product.productPrice}</p>
