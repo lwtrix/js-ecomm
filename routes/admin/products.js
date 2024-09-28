@@ -42,7 +42,7 @@ router.post(
   async (req, res) => {
     const filename = `${Date.now()}-${req.file.originalname}`
 
-    const productImage = await optimizeAndSaveImage(req.file.buffer, filename)
+    const productImage = await optimizeAndSaveImage(req.file.buffer, filename, req.file.mimetype)
 
     const newProduct = {
       ...req.body,
@@ -78,12 +78,21 @@ router.post(
     return { product };
   }),
   async (req, res) => {
-    const editedProduct = req.body;
+    let editedProduct;
 
-    if (req.file) {
-      editedProduct.productImage = req.file.buffer.toString('base64');
+    editedProduct = { ...req.body }
+
+    if(req.file) {
+      const filename = `${Date.now()}-${req.file.originalname}`
+      productImage = await optimizeAndSaveImage(req.file.buffer, filename, req.file.mimetype)
+
+      editedProduct = {
+        ...req.body,
+        productImage
+      }
     }
 
+    
     try {
       await Products.update(req.params.id, editedProduct);
     } catch (err) {
