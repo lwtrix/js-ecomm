@@ -140,5 +140,121 @@
     "totalPrice": 104,
     "date": "2024-08-29T18:57:55.601Z",
     "id": "1e669d5a"
+  },
+  {
+    "items": [
+      {
+        "id": "ac3d7258",
+        "quantity": 1,
+        "itemPrice": 15
+      },
+      {
+        "id": "e7fccbd5",
+        "quantity": 1,
+        "itemPrice": 39
+      }
+    ],
+    "totalPrice": 54,
+    "date": "2024-09-04T10:00:11.348Z",
+    "id": "650322fd"
+  },
+  {
+    "items": [
+      {
+        "id": "ac3d7258",
+        "quantity": 1,
+        "itemPrice": 15
+      },
+      {
+        "id": "e7fccbd5",
+        "quantity": 2,
+        "itemPrice": 39
+      },
+      {
+        "id": "a8f3ec8c",
+        "quantity": 1,
+        "itemPrice": 39
+      }
+    ],
+    "totalPrice": 132,
+    "date": "2024-09-04T10:39:47.253Z",
+    "id": "c8caab80"
+  },
+  {
+    "items": [
+      {
+        "id": "e7fccbd5",
+        "quantity": 1,
+        "itemPrice": 39
+      },
+      {
+        "id": "62b582ba",
+        "quantity": 1,
+        "itemPrice": 25
+      }
+    ],
+    "totalPrice": 64,
+    "date": "2024-09-04T10:44:58.166Z",
+    "id": "f5b5d0cc"
+  },
+  {
+    "items": [
+      {
+        "id": "a8f3ec8c",
+        "quantity": 1,
+        "itemPrice": 39
+      }
+    ],
+    "totalPrice": 39,
+    "date": "2024-09-06T23:53:27.885Z",
+    "id": "9045cda0"
+  },
+  {
+    "items": [
+      {
+        "id": "e7fccbd5",
+        "quantity": 1,
+        "itemPrice": 39
+      }
+    ],
+    "totalPrice": 39,
+    "date": "2024-09-15T12:44:12.880Z",
+    "id": "02f27f50"
+  },
+  {
+    "items": [
+      {
+        "id": "84d23150",
+        "quantity": 5,
+        "itemPrice": 22
+      }
+    ],
+    "totalPrice": 110,
+    "date": "2024-09-21T12:58:26.266Z",
+    "id": "45a2a92f"
+  },
+  {
+    "items": [
+      {
+        "id": "1c85a256",
+        "quantity": 1,
+        "itemPrice": 129
+      }
+    ],
+    "totalPrice": 129,
+    "date": "2024-09-27T10:05:01.619Z",
+    "id": "c471838e"
+  },
+  {
+    "items": [
+      {
+        "id": "1c85a256",
+        "quantity": 1,
+        "itemPrice": 129
+      }
+    ],
+    "totalPrice": 129,
+    "date": "2024-09-27T10:05:43.365Z",
+    "id": "e87bbd68"
   }
 ]

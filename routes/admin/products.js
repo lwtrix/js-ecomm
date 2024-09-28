@@ -4,16 +4,15 @@ const {
   isAuthenticated,
 } = require('../../middleware/admin/index');
 const multer = require('multer');
-const path = require('path')
 
 const Products = require('../../repositories/products');
+
 const { requireProductName, requireProductPrice, requireCategory } = require('./validators');
+const { optimizeAndSaveImage } = require('../../lib/images/utils');
 
 const addProductView = require('../../views/admin/products/add');
 const productsIndexView = require('../../views/admin/products/index');
 const editProductView = require('../../views/admin/products/edit');
-const sharp = require('sharp');
-const { optimizeAndSaveImage } = require('../../lib/images/utils');
 
 const router = express.Router();
 
@@ -68,6 +67,7 @@ router.get('/admin/products/:id/edit', isAuthenticated, async (req, res) => {
   return res.send(editProductView({ product }));
 });
 
+// edit a product
 router.post(
   '/admin/products/:id/edit',
   isAuthenticated,
