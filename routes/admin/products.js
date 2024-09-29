@@ -4,11 +4,15 @@ const {
   isAuthenticated,
 } = require('../../middleware/admin/index');
 const multer = require('multer');
-const fs = require('fs')
+const fs = require('fs');
 
 const Products = require('../../repositories/products');
 
-const { requireProductName, requireProductPrice, requireCategory } = require('./validators');
+const {
+  requireProductName,
+  requireProductPrice,
+  requireCategory,
+} = require('./validators');
 const { optimizeAndSaveImage } = require('../../lib/images/utils');
 
 const addProductView = require('../../views/admin/products/add');
@@ -18,7 +22,7 @@ const path = require('path');
 
 const router = express.Router();
 
-const storage = multer.memoryStorage()
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // get all products
@@ -41,13 +45,17 @@ router.post(
   [requireProductName, requireProductPrice, requireCategory],
   handleValErrors(addProductView),
   async (req, res) => {
-    const filename = `${Date.now()}-${req.file.originalname}`
+    const filename = `${Date.now()}-${req.file.originalname}`;
 
-    const productImage = await optimizeAndSaveImage(req.file.buffer, filename, req.file.mimetype)
+    const productImage = await optimizeAndSaveImage(
+      req.file.buffer,
+      filename,
+      req.file.mimetype
+    );
 
     const newProduct = {
       ...req.body,
-      productImage
+      productImage,
     };
 
     await Products.create(newProduct);
@@ -81,20 +89,35 @@ router.post(
   }),
   async (req, res) => {
     let editedProduct;
+    editedProduct = { ...req.body };
 
-    editedProduct = { ...req.body }
+    if (req.file) {
+      const product = await Products.getOneById(req.params.id);
+      const imgPath = path.join(
+        __dirname,
+        '../../public/',
+        product.productImage
+      );
+      fs.unlink(imgPath, async (err) => {
+       if(err) {
+        console.log(err)
+        res.redirect('/admin/products')
+       }
+      });
 
-    if(req.file) {
-      const filename = `${Date.now()}-${req.file.originalname}`
-      productImage = await optimizeAndSaveImage(req.file.buffer, filename, req.file.mimetype)
+      const filename = `${Date.now()}-${req.file.originalname}`;
+      productImage = await optimizeAndSaveImage(
+        req.file.buffer,
+        filename,
+        req.file.mimetype
+      );
 
       editedProduct = {
         ...req.body,
-        productImage
-      }
+        productImage,
+      };
     }
 
-    
     try {
       await Products.update(req.params.id, editedProduct);
     } catch (err) {
@@ -107,17 +130,17 @@ router.post(
 
 // remove a product
 router.post('/admin/products/:id/delete', isAuthenticated, async (req, res) => {
-  const product = await Products.getOneById(req.params.id)
+  const product = await Products.getOneById(req.params.id);
 
-  const imgPath = path.join(__dirname, '../../public/', product.productImage)
+  const imgPath = path.join(__dirname, '../../public/', product.productImage);
   fs.unlink(imgPath, async (err) => {
-    if(!err) {
+    if (!err) {
       await Products.delete(req.params.id);
-      return res.redirect('/admin/products')
+      return res.redirect('/admin/products');
     }
-    console.log(err)
-    return res.redirect('admin/products')
-  })  
+    console.log(err);
+    return res.redirect('admin/products');
+  });
 });
 
 module.exports = router;
