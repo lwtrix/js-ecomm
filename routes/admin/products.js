@@ -4,6 +4,7 @@ const {
   isAuthenticated,
 } = require('../../middleware/admin/index');
 const multer = require('multer');
+const fs = require('fs')
 
 const Products = require('../../repositories/products');
 
@@ -13,6 +14,7 @@ const { optimizeAndSaveImage } = require('../../lib/images/utils');
 const addProductView = require('../../views/admin/products/add');
 const productsIndexView = require('../../views/admin/products/index');
 const editProductView = require('../../views/admin/products/edit');
+const path = require('path');
 
 const router = express.Router();
 
@@ -105,9 +107,17 @@ router.post(
 
 // remove a product
 router.post('/admin/products/:id/delete', isAuthenticated, async (req, res) => {
-  await Products.delete(req.params.id);
+  const product = await Products.getOneById(req.params.id)
 
-  return res.redirect('/admin/products')
+  const imgPath = path.join(__dirname, '../../public/', product.productImage)
+  fs.unlink(imgPath, async (err) => {
+    if(!err) {
+      await Products.delete(req.params.id);
+      return res.redirect('/admin/products')
+    }
+    console.log(err)
+    return res.redirect('admin/products')
+  })  
 });
 
 module.exports = router;
