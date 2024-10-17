@@ -1,16 +1,23 @@
 [
   {
-    "productName": "Winter Jacket",
-    "productPrice": 129,
-    "productCategory": "Outerwear",
-    "productImage": "/uploads/1727525351153-vecteezy_outerwear-isolated-on-transparent-background_47241057.png",
-    "id": "1c85a256"
-  },
-  {
     "productName": "Leather Jacket",
     "productPrice": 80,
     "productCategory": "Outerwear",
-    "productImage": "/uploads/1727524905382-vecteezy_a-black-leather-jacket_46558139.png",
+    "productImage": "/uploads/1727604438269-vecteezy_ai-generated-man-fashion-leather-dress-isolated-on_35647637.png",
     "id": "49eac9f2"
+  },
+  {
+    "productName": "Winter Jacket",
+    "productPrice": 129,
+    "productCategory": "Outerwear",
+    "productImage": "/uploads/1727603941932-vecteezy_outerwear-isolated-on-transparent-background_47241057.png",
+    "id": "63965706"
+  },
+  {
+    "productName": "Blue Jeans",
+    "productPrice": 79,
+    "productCategory": "Bottoms",
+    "productImage": "/uploads/1727603970747-vecteezy_blue-jeans-isolated-on-transparent-background_44813274.png",
+    "id": "0ec2da2f"
   }
 ]
