@@ -13,7 +13,10 @@ const {
   requireProductPrice,
   requireCategory,
 } = require('./validators');
-const { optimizeAndSaveImage } = require('../../lib/images/utils');
+const {
+  optimizeAndSaveImage,
+  deleteProductImage,
+} = require('../../lib/images/utils');
 
 const addProductView = require('../../views/admin/products/add');
 const productsIndexView = require('../../views/admin/products/index');
@@ -93,29 +96,20 @@ router.post(
 
     if (req.file) {
       const product = await Products.getOneById(req.params.id);
-      const imgPath = path.join(
-        __dirname,
-        '../../public/',
-        product.productImage
-      );
-      fs.unlink(imgPath, async (err) => {
-       if(err) {
-        console.log(err)
-        res.redirect('/admin/products')
-       }
-      });
+      const imgDeleted = await deleteProductImage(product.productImage);
+      if (imgDeleted) {
+        const filename = `${Date.now()}-${req.file.originalname}`;
+        productImage = await optimizeAndSaveImage(
+          req.file.buffer,
+          filename,
+          req.file.mimetype
+        );
 
-      const filename = `${Date.now()}-${req.file.originalname}`;
-      productImage = await optimizeAndSaveImage(
-        req.file.buffer,
-        filename,
-        req.file.mimetype
-      );
-
-      editedProduct = {
-        ...req.body,
-        productImage,
-      };
+        editedProduct = {
+          ...req.body,
+          productImage,
+        };
+      }
     }
 
     try {
@@ -130,17 +124,11 @@ router.post(
 
 // remove a product
 router.post('/admin/products/:id/delete', isAuthenticated, async (req, res) => {
-  const product = await Products.getOneById(req.params.id);
-
-  const imgPath = path.join(__dirname, '../../public/', product.productImage);
-  fs.unlink(imgPath, async (err) => {
-    if (!err) {
-      await Products.delete(req.params.id);
-      return res.redirect('/admin/products');
-    }
-    console.log(err);
-    return res.redirect('admin/products');
-  });
+  const product = await Products.getOneById(req.params.id)
+  await deleteProductImage(product.productImage)
+  await Products.delete(req.params.id);
+  
+  return res.redirect('/admin/products');
 });
 
 module.exports = router;
