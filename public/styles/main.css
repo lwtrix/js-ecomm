@@ -286,17 +286,14 @@ a {
 
 .admin-layout .dashboard-view,
 .admin-layout .products-view,
-.admin-layout .product-form-view {
+.admin-layout .product-form-view,
+.admin-layout .orders-view {
   padding: 0 1rem;
   padding-top: 4rem;
   background-color: rgb(241, 241, 241);
   width: 1112px;
   margin: 0 auto;
 }
-
-/* ************* */
-/* DASHBOARD STYLES */
-/* ************* */
 
 .admin-view-wrapper {
   background-color: rgb(253, 253, 253);
@@ -305,6 +302,10 @@ a {
   padding: 24px 24px;
   border-radius: 12px;
 }
+
+/* ************* */
+/* DASHBOARD STYLES */
+/* ************* */
 
 .dashboard-view .stats-container {
   margin-top: 48px;
@@ -402,3 +403,21 @@ a {
   color: rgb(178, 72, 27);
 }
 
+
+/* ************* */
+/* ORDERS INDEX STYLES */
+/* ************* */
+
+.orders-view .table-headings {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.orders-view .orders-container {
+  margin-top: 48px;
+}
+
+.orders-view .orders-container .order-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.112);
+  padding-bottom: 12px;
+}

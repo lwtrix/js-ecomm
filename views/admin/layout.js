@@ -30,7 +30,7 @@ module.exports = ({ content, page }) => {
                   </div>
                   <span href="/admin/dashboard">Products</span>
                 </a>
-                <a href="/admin/dashboard" class="nav-item ${page === 'orders' ? 'active' : ''}">
+                <a href="/admin/orders" class="nav-item ${page === 'orders' ? 'active' : ''}">
                   <div class="icon-container">
                     <i class="bi bi-tags"></i>
                   </div>

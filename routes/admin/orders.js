@@ -1,6 +1,8 @@
 const express = require('express')
 
 const OrdersRepository = require('../../repositories/orders')
+const adminOrdersView = require('../../views/admin/orders/index')
+
 
 const router = express.Router()
 
@@ -11,7 +13,7 @@ router.get('/admin/orders', async (req, res) => {
     return res.send([])
   }
 
-  return res.send(orders)
+  return res.send(adminOrdersView({ orders }))
 })
 
 module.exports = router
