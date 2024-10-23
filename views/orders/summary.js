@@ -1,3 +1,4 @@
+const { formatDate } = require('../../lib/public');
 const layout = require('./layout');
 
 module.exports = ({ order }) => {
@@ -6,26 +7,7 @@ module.exports = ({ order }) => {
 
   const total = order.totalPrice + taxFee + shipFee
 
-  const renderOrderDate = () => {
-    const day = order.date.getDate();
-    const month = order.date.toLocaleString('default', { month: 'long' });
-
-    const daySuffix = (day) => {
-      if (day > 3 && day < 21) return 'th';
-      switch (day % 10) {
-        case 1:
-          return 'st';
-        case 2:
-          return 'nd';
-        case 3:
-          return 'rd';
-        default:
-          return 'th';
-      }
-    };
-
-    return `${day}${daySuffix(day)} ${month}`;
-  };
+  const renderOrderDate = formatDate(order.date)
 
   const renderOrderItems = () => {
     return order.items.map(item => 
