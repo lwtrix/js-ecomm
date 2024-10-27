@@ -52,7 +52,7 @@ module.exports = ({ order }) => {
           </div>
           <div class="col-4 bg-light py-2"> 
             <p class="my-0">Order Date</p>
-            <p class="my-0 mt-1 fw-semibold">${renderOrderDate()}</p>
+            <p class="my-0 mt-1 fw-semibold">${renderOrderDate}</p>
           </div>
           <div class="col-4 bg-light py-2">
             <p class="my-0">Payment</p>
