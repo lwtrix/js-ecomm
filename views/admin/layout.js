@@ -14,7 +14,7 @@ module.exports = ({ content, page }) => {
           <div class="admin-layout container d-flex">
             <nav class="d-flex flex-column align-items-center">
               <div class="nav-brand align-self-start nav-logo d-flex flex-column">
-                <span class="logo">Monk Store</span>
+                <img src="/logo/monklogo.png" class="logo"></img>
                 <span class="label">Admin Panel</span>
               </div>
               <div class="nav-items-container d-flex flex-column">
