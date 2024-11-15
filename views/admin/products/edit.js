@@ -27,6 +27,7 @@ module.exports = ({ errors, product }) => {
             <div class="mb-2">
               <label for="productPriceField" class="form-label">Price</label>
               <div class="input-group has-validation">
+                <span class="input-group-text">£</span>
                 <input name="productPrice" type="text" value="${product.productPrice}" class="form-control ${getError(errors, 'productPrice') ? "is-invalid" : ""}" id="productPriceField" aria-describedby="productPriceFieldFeedback">
                 <div id="productPriceFieldFeedback" class="invalid-feedback">
                   ${getError(errors, 'productPrice')}
