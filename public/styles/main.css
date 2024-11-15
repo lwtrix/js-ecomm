@@ -215,15 +215,16 @@ a {
   padding-top: 52px;
 }
 
+.admin-layout .nav-brand {
+  margin-top: 2.5rem;
+}
+
 .admin-layout nav .nav-logo {
   margin-left: 48px;
 }
 
 .admin-layout nav .nav-logo .logo {
-  color:#f8c630;
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: 3px;
+  width: 12.5rem;
 }
 
 .admin-layout nav .nav-logo .label {
@@ -301,6 +302,8 @@ a {
   margin: 0 auto;
   padding: 24px 24px;
   border-radius: 12px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.076),
+              -2px -2px 8px rgba(0, 0, 0, 0.038);
 }
 
 /* ************* */
