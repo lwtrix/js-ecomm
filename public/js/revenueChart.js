@@ -5,8 +5,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   const data = transformOrdersForChart(orders);
   const formatDate = d3.timeFormat('%Y-%m-%d');
 
-  const startDate = d3.min(data, (d) => d.date);
-  const endDate = d3.max(data, (d) => d.date);
+  const today = new Date();
+  const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, 1); // Two months ago, first day
+  
+  // Filter the data to show last month from current day
+  const lastOneMonthData = data.filter((d) => {
+    const orderDate = new Date(d.date); 
+    return orderDate >= oneMonthAgo && orderDate <= today;
+  });
+
+  const startDate = d3.min(lastOneMonthData, (d) => d.date);
+  const endDate = d3.max(lastOneMonthData, (d) => d.date);
 
   // Generate the full range of dates
   const fullDateRange = [];
@@ -28,6 +37,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       amount: existingEntry ? existingEntry.amount : 0, // Use the amount if it exists, else 0
     };
   });
+
+  
+  // **********************
+  // GRAPH CODE
+  // **********************
 
   // Graph dimensions
   const margin = { top: 20, right: 30, bottom: 50, left: 60 };
