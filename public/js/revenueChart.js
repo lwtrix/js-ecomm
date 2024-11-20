@@ -19,7 +19,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Convert date values to strings
   const completeData = fullDateRange.map((dateStr) => {
-    const existingEntry = data.find((d) => new Date(d.date).toISOString().split('T')[0] === formatDate(dateStr));
+    const existingEntry = data.find(
+      (d) =>
+        new Date(d.date).toISOString().split('T')[0] === formatDate(dateStr)
+    );
     return {
       date: dateStr,
       amount: existingEntry ? existingEntry.amount : 0, // Use the amount if it exists, else 0
@@ -76,13 +79,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     .x((d) => x(d.date))
     .y((d) => y(d.amount));
 
-  svg
+  // Line Path
+  const linePath = svg
     .append('path')
     .datum(completeData)
     .attr('fill', 'none')
     .attr('stroke', '#21212b')
     .attr('stroke-width', 2)
     .attr('d', line);
+
+  const totalLength = linePath.node().getTotalLength();
+
+  // Line Path animation
+  linePath
+    .attr('stroke-dasharray', totalLength)
+    .attr('stroke-dashoffset', totalLength)
+    .transition()
+    .duration(2000)
+    .ease(d3.easePolyIn)
+    .attr('stroke-dashoffset', 0);
 
   // Dots
   svg
@@ -93,5 +108,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     .attr('cx', (d) => x(d.date))
     .attr('cy', (d) => y(d.amount))
     .attr('r', 3)
-    .attr('fill', '#f8c630');
+    .attr('fill', '#f8c630')
+    .attr('opacity', 0)
+    .transition()
+    .duration(2000)
+    .delay((d, i) => i * 100)
+    .attr('opacity', 1)
 });
