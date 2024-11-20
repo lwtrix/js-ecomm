@@ -4,7 +4,6 @@ const CartRepository = require('../repositories/carts');
 const ProductsRepository = require('../repositories/products');
 
 const cartIndexView = require('../views/cart/index');
-const emptyCartView = require('../views/cart/empty');
 const { updateCartQuantity } = require('../lib/routes/cart');
 const { isCartEmpty } = require('../middleware');
 

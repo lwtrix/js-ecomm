@@ -11,7 +11,7 @@ module.exports = ({ orders }) => {
       return `<div class="order-row row my-1">
         <div class="col-2 d-flex align-items-center">${order.id}</div>
         <div class="col-6 d-flex align-items-center">${formatDate(order.date)}</div>
-        <div class="col-2 d-flex align-items-center">${order.totalPrice}</div>
+        <div class="col-2 d-flex align-items-center">£${order.totalPrice}</div>
         <div class="col-2 d-flex align-items-center">${totalItems}</div>
       </div>`;
     })

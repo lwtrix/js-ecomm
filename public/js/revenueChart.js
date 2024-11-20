@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const today = new Date();
   const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, 1); // Two months ago, first day
-  
+
   // Filter the data to show last month from current day
   const lastOneMonthData = data.filter((d) => {
-    const orderDate = new Date(d.date); 
+    const orderDate = new Date(d.date);
     return orderDate >= oneMonthAgo && orderDate <= today;
   });
 
@@ -38,14 +38,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
   });
 
-  
   // **********************
   // GRAPH CODE
   // **********************
 
   // Graph dimensions
   const margin = { top: 20, right: 30, bottom: 50, left: 60 };
-  const width = 800 - margin.left - margin.right;
+  const width = 920 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
   const svg = d3
@@ -113,6 +112,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     .ease(d3.easePolyIn)
     .attr('stroke-dashoffset', 0);
 
+  const tooltip = d3.select('#tooltip');
+
   // Dots
   svg
     .selectAll('dot')
@@ -121,11 +122,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     .append('circle')
     .attr('cx', (d) => x(d.date))
     .attr('cy', (d) => y(d.amount))
-    .attr('r', 3)
+    .attr('r', 4)
     .attr('fill', '#f8c630')
     .attr('opacity', 0)
+    .on('mouseover', (event, d) => {
+      // Show the tooltip on hover
+      tooltip
+        .style('visibility', 'visible')
+        .html(`Date: ${formatDate(d.date)}<br>Amount: £${d.amount.toFixed(2)}`)
+        .style('top', `${event.pageY + 10}px`) // Positioning the tooltip slightly below the cursor
+        .style('left', `${event.pageX + 10}px`); // Positioning the tooltip slightly to the right of the cursor
+    })
+    .on('mousemove', (event) => {
+      // Update tooltip position as the mouse moves
+      tooltip
+        .style('top', `${event.pageY + 10}px`)
+        .style('left', `${event.pageX + 10}px`);
+    })
+    .on('mouseout', () => {
+      // Hide the tooltip when mouse leaves the dot
+      tooltip.style('visibility', 'hidden');
+    })
     .transition()
     .duration(2000)
     .delay((d, i) => i * 100)
-    .attr('opacity', 1)
+    .attr('opacity', 1);
 });
