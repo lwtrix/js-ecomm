@@ -2,259 +2,91 @@
   {
     "items": [
       {
-        "id": "62b582ba",
+        "id": "49eac9f2",
         "quantity": 1,
-        "itemPrice": 25
+        "itemPrice": 80
       },
       {
-        "id": "ac3d7258",
-        "quantity": 2,
-        "itemPrice": 15
+        "id": "0ec2da2f",
+        "quantity": 1,
+        "itemPrice": 79
       },
       {
-        "id": "e7fccbd5",
+        "id": "2be0b69f",
         "quantity": 1,
-        "itemPrice": 39
+        "itemPrice": 120
       }
     ],
-    "totalPrice": 94,
-    "date": "2024-08-28T19:10:19.257Z",
-    "id": "632f7a9c"
+    "totalPrice": 279,
+    "date": "2024-10-27T10:29:26.088Z",
+    "id": "2fbdc503"
   },
   {
     "items": [
       {
-        "id": "ed1a0390",
+        "id": "49eac9f2",
         "quantity": 2,
-        "itemPrice": 9
+        "itemPrice": 80
       },
       {
-        "id": "84d23150",
-        "quantity": 2,
-        "itemPrice": 25
-      },
-      {
-        "id": "2c8745bb",
-        "quantity": 2,
-        "itemPrice": 56
-      },
-      {
-        "id": "5755ac09",
-        "quantity": 2,
-        "itemPrice": 25
+        "id": "0ec2da2f",
+        "quantity": 1,
+        "itemPrice": 79
       }
     ],
-    "totalPrice": 230,
-    "date": "2024-08-28T19:11:05.355Z",
-    "id": "fbfb6985"
+    "totalPrice": 239,
+    "date": "2024-10-27T10:31:21.982Z",
+    "id": "13da9ef5"
   },
   {
     "items": [
       {
-        "id": "ed1a0390",
-        "quantity": 2,
-        "itemPrice": 9
+        "id": "0ec2da2f",
+        "quantity": 1,
+        "itemPrice": 79
       },
       {
-        "id": "84d23150",
-        "quantity": 2,
-        "itemPrice": 25
-      },
-      {
-        "id": "2c8745bb",
-        "quantity": 2,
-        "itemPrice": 56
-      },
-      {
-        "id": "5755ac09",
-        "quantity": 2,
-        "itemPrice": 25
+        "id": "49eac9f2",
+        "quantity": 1,
+        "itemPrice": 80
       }
     ],
-    "totalPrice": 230,
-    "date": "2024-08-28T19:11:24.857Z",
-    "id": "590b3904"
+    "totalPrice": 159,
+    "date": "2024-11-19T21:38:16.895Z",
+    "id": "4474f985"
   },
   {
     "items": [
       {
-        "id": "ed1a0390",
+        "id": "2be0b69f",
         "quantity": 2,
-        "itemPrice": 9
-      },
-      {
-        "id": "2c8745bb",
-        "quantity": 2,
-        "itemPrice": 56
-      },
-      {
-        "id": "5755ac09",
-        "quantity": 2,
-        "itemPrice": 25
+        "itemPrice": 120
       }
     ],
-    "totalPrice": 180,
-    "date": "2024-08-28T19:12:24.590Z",
-    "id": "45f839f1"
+    "totalPrice": 240,
+    "date": "2024-11-19T21:38:34.928Z",
+    "id": "8782d486"
   },
   {
     "items": [
       {
-        "id": "ed1a0390",
-        "quantity": 2,
-        "itemPrice": 9
+        "id": "49eac9f2",
+        "quantity": 1,
+        "itemPrice": 80
       },
       {
-        "id": "2c8745bb",
-        "quantity": 2,
-        "itemPrice": 56
+        "id": "2be0b69f",
+        "quantity": 1,
+        "itemPrice": 120
       },
       {
-        "id": "5755ac09",
-        "quantity": 2,
-        "itemPrice": 25
+        "id": "0ec2da2f",
+        "quantity": 1,
+        "itemPrice": 79
       }
     ],
-    "totalPrice": 180,
-    "date": "2024-08-28T19:14:59.020Z",
-    "id": "a536885d"
-  },
-  {
-    "items": [
-      {
-        "id": "62b582ba",
-        "quantity": 2,
-        "itemPrice": 25
-      },
-      {
-        "id": "ac3d7258",
-        "quantity": 1,
-        "itemPrice": 15
-      },
-      {
-        "id": "e7fccbd5",
-        "quantity": 1,
-        "itemPrice": 39
-      }
-    ],
-    "totalPrice": 104,
-    "date": "2024-08-29T18:57:55.601Z",
-    "id": "1e669d5a"
-  },
-  {
-    "items": [
-      {
-        "id": "ac3d7258",
-        "quantity": 1,
-        "itemPrice": 15
-      },
-      {
-        "id": "e7fccbd5",
-        "quantity": 1,
-        "itemPrice": 39
-      }
-    ],
-    "totalPrice": 54,
-    "date": "2024-09-04T10:00:11.348Z",
-    "id": "650322fd"
-  },
-  {
-    "items": [
-      {
-        "id": "ac3d7258",
-        "quantity": 1,
-        "itemPrice": 15
-      },
-      {
-        "id": "e7fccbd5",
-        "quantity": 2,
-        "itemPrice": 39
-      },
-      {
-        "id": "a8f3ec8c",
-        "quantity": 1,
-        "itemPrice": 39
-      }
-    ],
-    "totalPrice": 132,
-    "date": "2024-09-04T10:39:47.253Z",
-    "id": "c8caab80"
-  },
-  {
-    "items": [
-      {
-        "id": "e7fccbd5",
-        "quantity": 1,
-        "itemPrice": 39
-      },
-      {
-        "id": "62b582ba",
-        "quantity": 1,
-        "itemPrice": 25
-      }
-    ],
-    "totalPrice": 64,
-    "date": "2024-09-04T10:44:58.166Z",
-    "id": "f5b5d0cc"
-  },
-  {
-    "items": [
-      {
-        "id": "a8f3ec8c",
-        "quantity": 1,
-        "itemPrice": 39
-      }
-    ],
-    "totalPrice": 39,
-    "date": "2024-09-06T23:53:27.885Z",
-    "id": "9045cda0"
-  },
-  {
-    "items": [
-      {
-        "id": "e7fccbd5",
-        "quantity": 1,
-        "itemPrice": 39
-      }
-    ],
-    "totalPrice": 39,
-    "date": "2024-09-15T12:44:12.880Z",
-    "id": "02f27f50"
-  },
-  {
-    "items": [
-      {
-        "id": "84d23150",
-        "quantity": 5,
-        "itemPrice": 22
-      }
-    ],
-    "totalPrice": 110,
-    "date": "2024-09-21T12:58:26.266Z",
-    "id": "45a2a92f"
-  },
-  {
-    "items": [
-      {
-        "id": "1c85a256",
-        "quantity": 1,
-        "itemPrice": 129
-      }
-    ],
-    "totalPrice": 129,
-    "date": "2024-09-27T10:05:01.619Z",
-    "id": "c471838e"
-  },
-  {
-    "items": [
-      {
-        "id": "1c85a256",
-        "quantity": 1,
-        "itemPrice": 129
-      }
-    ],
-    "totalPrice": 129,
-    "date": "2024-09-27T10:05:43.365Z",
-    "id": "e87bbd68"
+    "totalPrice": 279,
+    "date": "2024-11-20T21:40:53.411Z",
+    "id": "173c7ba0"
   }
 ]

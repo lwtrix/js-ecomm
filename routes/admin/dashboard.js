@@ -12,6 +12,12 @@ const {
 
 const router = express.Router();
 
+router.get('/admin/dashboard/revenue-graph', isAuthenticated, async (req, res) => {
+  const orders = await OrdersRepository.getAll();
+
+  res.json(orders);
+});
+
 router.get('/admin/dashboard', isAuthenticated, async (req, res) => {
   const orders = await OrdersRepository.getAll();
 
