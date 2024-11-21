@@ -33,12 +33,19 @@ module.exports = ({ stats }) => {
           </div>
         </div>
       </div>
-      <div class="admin-view-wrapper">
-        <div class="chart" id="chart"></div>
-        <div id="tooltip"></div>
+      <div class="admin-view-wrapper revenue-graph">
+        <div class="revenue-chart">
+          <h4>Revenue Graph</h4>
+          <div class="graph-info">
+            <span>Y Axis - Revenue in £</span>
+            <span>X Axis - Date (Month/Day)</span>
+          </div>
+          <div class="chart" id="chart"></div>
+          <div id="tooltip"></div>
+        </div>
       </div>
     </div>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="/js/transformOrdersForGraph.js"></script>
     <script src="/js/revenueChart.js"></script>
     `,

@@ -5,7 +5,7 @@
 
 html, body {
   box-sizing: border-box;
-  background-color: rgb(235,235,235);
+  background-color: rgb(241, 241, 241);
 }
 
 a {
@@ -38,14 +38,13 @@ a {
 .button-link {
   cursor: pointer;
   font-weight: 500;
-  background-color: rgba(241, 241, 241, 0.792);
+  background-color: rgba(0, 0, 0, 0.063);
   padding: 8px;
   color: rgba(0, 0, 0, 0.794);
 }
 
 .button-link:hover {
-  background-color: rgba(241, 241, 241, 0.313);
-  color: #ffc929
+  background-color: rgba(0, 0, 0, 0.172);
 }
 
 .button.button-fluid {
@@ -251,7 +250,7 @@ a {
 }
 
 .admin-layout nav .nav-items-container .nav-item:hover {
-  background-color: #f8c630b9;
+  background-color: rgba(230, 230, 230, 0.77);
   transition: background-color .2s ease;
 }
 
@@ -379,7 +378,7 @@ a {
 }
 
 .products-view .products-container .product-row i {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .products-view .products-container .product-row .icon-wrapper {
@@ -427,6 +426,21 @@ a {
 
 /* D3 GRAPHS STYLES */
 
+.chart {
+  margin-top: 2rem;
+}
+
+.graph-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #898989;
+}
+
+.revenue-graph {
+  margin-top: 1.5rem;
+}
+
 /* DOTS TOOLTIP */
 
 #tooltip {
@@ -435,7 +449,7 @@ a {
   color: white;
   padding: 8px;
   border-radius: 5px;
-  visibility: hidden; /* Hidden by default */
-  pointer-events: none; /* Tooltip does not interfere with other elements */
+  visibility: hidden;
+  pointer-events: none;
   font-size: 14px;
 }

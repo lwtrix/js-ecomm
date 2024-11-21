@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // **********************
 
   // Graph dimensions
-  const margin = { top: 20, right: 30, bottom: 50, left: 60 };
-  const width = 920 - margin.left - margin.right;
+  const margin = { top: 20, right: 30, bottom: 50, left: 30 };
+  const width = 860 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
   const svg = d3
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     .call(
       d3
         .axisBottom(x)
-        .ticks(d3.timeDay.every(4))
+        .ticks(d3.timeDay.every(1))
         .tickFormat(d3.timeFormat('%b %d'))
     )
     .selectAll('text')
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     .attr('stroke-dashoffset', totalLength)
     .transition()
     .duration(2000)
-    .ease(d3.easePolyIn)
+    .ease(d3.easeSin)
     .attr('stroke-dashoffset', 0);
 
   const tooltip = d3.select('#tooltip');
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       tooltip.style('visibility', 'hidden');
     })
     .transition()
-    .duration(2000)
+    .duration(400)
     .delay((d, i) => i * 100)
     .attr('opacity', 1);
 });
