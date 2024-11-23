@@ -37,7 +37,7 @@ module.exports = ({ stats }) => {
         <div class="revenue-chart">
           <h4>Revenue Graph</h4>
           <div class="graph-info">
-            <span>Y Axis - Revenue in £</span>
+            <span>Y Axis - Revenue in £ (British Pounds)</span>
             <span>X Axis - Date (Month/Day)</span>
           </div>
           <div class="chart" id="chart"></div>
