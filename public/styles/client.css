@@ -1,0 +1,161 @@
+/* ************* */
+/* NAV STYLES */
+/* ************* */
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+nav {
+  height: 90px;
+  background-color: white;
+}
+
+nav .container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .nav-logo {
+  width: 105px;
+  display: block;
+}
+
+nav .nav-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ************* */
+/* PRODUCTS STYLES */
+/* ************* */
+
+.products-list {
+  width: 1320px;
+}
+
+.products-list .card-img-container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.products-list .card-img-top {
+  width: 100%;
+  height: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.products-list .card {
+  margin-right: 2%;
+  margin-bottom: 2%;
+  width:48%;
+}
+
+@media (min-width: 992px) {
+  .products-list .card {
+    margin-right: 1%;
+    margin-bottom: 1%;
+    width: 32%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .products-list .card {
+    margin-right: 1%;
+    margin-bottom: 1%;
+    width: 24%;
+  }
+}
+
+/* ************* */
+/* CART STYLES */
+/* ************* */
+
+.cart {
+  margin-top: 60px;
+}
+
+.cart .cart-items .item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.cart-empty {
+  margin-top: 120px;
+}
+
+.cart-empty .msg-box {
+  background-color: white;
+  border-radius: 8px;
+}
+
+/* ************* */
+/* ORDER CHECKOUT STYLES */
+/* ************* */
+
+.order-summary {
+  margin: 1rem auto;
+  max-width: 960px;
+}
+
+.order-summary .return-btn {
+  color: rgba(0, 0, 0, 0.613);
+}
+
+.order-summary .top-brand {
+  border-radius: 8px;
+}
+
+.order-summary .order-details {
+  padding: 0 10px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.order-summary .order-details div {
+  border-radius: 8px 0 0 8px;
+}
+
+.order-summary .order-details div:nth-child(2) {
+  border-radius: 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.41);
+  border-right: 1px solid rgba(0, 0, 0, 0.41);
+}
+
+.order-summary .order-details div:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.order-summary .order-items {
+  margin-top: 1.5rem;
+}
+
+.order-summary .order-item {
+  margin-bottom: 1.5rem;
+}
+
+.order-summary .order-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.order-summary .order-calc {
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.order-summary {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
